@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import "../styles/Register.css";
-import signinImage from "../assets/signin.jpg";
+import signinImage from "../assets/signin.png";
 
 export const Register: React.FC = () => {
     const [form, setForm] = useState({

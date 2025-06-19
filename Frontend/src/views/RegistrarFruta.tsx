@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import "../styles/RegistrarFruta.css";
-import frutaImage from "../assets/RegistrarFruta.webp"; // Usa tu imagen decorativa
+import frutaImage from "../assets/RegistrarFruta.png";
 
 export const RegistrarFruta: React.FC = () => {
   const [form, setForm] = useState({

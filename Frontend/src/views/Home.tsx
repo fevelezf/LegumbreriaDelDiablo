@@ -8,21 +8,25 @@ export const Home: React.FC = () => {
 
     return (
         <div className="home-container">
-            <h1>🍇 La Legumbrería del Diablo 🍇</h1>
+            {/* Capa oscura sobre el fondo para legibilidad */}
+            <div className="overlay"></div>
 
-            <p className="home-intro">
-                Este es un espacio dedicado a explorar las misteriosas y poderosas <strong>Frutas del Diablo</strong>.
-                Aquí podrás conocer sus tipos, efectos, origen y leer las experiencias de otros usuarios del Grand Line.
-            </p>
+            <div className="home-content">
+                <h1>🍇 La Legumbrería del Diablo 🍇</h1>
 
-            <p>
-                ¿Has escuchado de alguna? ¿Quieres dejar tu opinión? Descubre el catálogo y califica las frutas que te intrigan.
-            </p>
+                <p className="home-intro">
+                    Este es un espacio dedicado a explorar las misteriosas y poderosas <strong>Frutas del Diablo</strong>.
+                    Aquí podrás conocer sus tipos, efectos, origen y leer las experiencias de otros usuarios del Grand Line.
+                </p>
 
-            <button className="home-btn" onClick={() => navigate("/catalogo")}>
-                Explorar Frutas
-            </button>
+                <p>
+                    ¿Has escuchado de alguna? ¿Quieres dejar tu opinión? Descubre el catálogo y califica las frutas que te intrigan.
+                </p>
+
+                <button className="home-btn" onClick={() => navigate("/catalogo")}>
+                    Explorar Frutas
+                </button>
+            </div>
         </div>
     );
 };
-

@@ -32,15 +32,18 @@ export const Navbar: React.FC = () => {
 
             {/* Acciones de autenticación */}
             <div className="navbar-right">
-                {!user ? (
+                {user ? (
+                    <>
+                        <span className="navbar-username">👤 {user.username}</span>
+                        <button className="navbar-login-button" onClick={handleLogout}>
+                            Sign Out
+                        </button>
+                    </>
+                ) : (
                     <>
                         <Link to="/login" className="navbar-login-button">Sign In</Link>
                         <Link to="/register" className="navbar-login-button">Sign Up</Link>
                     </>
-                ) : (
-                    <button className="navbar-login-button" onClick={handleLogout}>
-                        Sign Out
-                    </button>
                 )}
             </div>
         </nav>

@@ -62,3 +62,18 @@
 .form-comentario button:hover {
     background-color: #43a047;
 }
+
+.login-requerido {
+    text-align: center;
+    margin-top: 2rem;
+    font-size: 1rem;
+    color: #aaa;
+}
+
+.login-requerido a {
+    color: #ff5252;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+

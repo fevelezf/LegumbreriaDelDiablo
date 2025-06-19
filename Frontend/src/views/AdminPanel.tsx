@@ -1,65 +1,50 @@
-// Importo React y los hooks necesarios
 import { useEffect, useState } from "react";
-
-// Importo los estilos específicos de este panel
 import "../styles/AdminPanel.css";
 
-// Defino el tipo de dato para una fruta
+import frutasData from "../data/frutas.json";
+import usuariosData from "../data/usuarios.json";
+
+// Tipos de datos
 type Fruta = {
     id: string;
     nombre: string;
     tipo: string;
 };
 
-// Defino el tipo de dato para un usuario
 type Usuario = {
-    id: string;
-    nombre: string;
+    username: string;
     email: string;
+    password: string;
+    role: string;
 };
 
-// Componente principal del panel de administración
+
 export const AdminPanel: React.FC = () => {
-    // Estado para almacenar frutas y usuarios (simulación de base de datos)
     const [frutas, setFrutas] = useState<Fruta[]>([]);
     const [usuarios, setUsuarios] = useState<Usuario[]>([]);
 
-    // Estados para los inputs de búsqueda de fruta y usuario
     const [buscarFruta, setBuscarFruta] = useState({ nombre: "", tipo: "" });
-    const [buscarUsuario, setBuscarUsuario] = useState({ nombre: "", email: "" });
+    const [buscarUsuario, setBuscarUsuario] = useState({ username: "", email: "" });
 
-    // useEffect para simular la carga inicial de datos
     useEffect(() => {
-        // Simulo una respuesta de la API con frutas y usuarios
-        setFrutas([
-            { id: "1", nombre: "Gomu Gomu no Mi", tipo: "Paramecia" },
-            { id: "2", nombre: "Mera Mera no Mi", tipo: "Logia" },
-        ]);
-
-        setUsuarios([
-            { id: "1", nombre: "Monkey D. Luffy", email: "luffy@onepiece.com" },
-            { id: "2", nombre: "Portgas D. Ace", email: "ace@onepiece.com" },
-        ]);
+        // ✅ Cargar desde JSON
+        setFrutas(frutasData);
+        setUsuarios(usuariosData);
     }, []);
 
-    // Función simulada para eliminar una fruta
     const eliminarFruta = () => {
-        alert("Fruta eliminada (simulado).");
-        // Aquí debería ir la lógica real de eliminación vía API
+        alert("Fruta eliminada (ojo es simulado)");
     };
 
-    // Función simulada para eliminar un usuario
     const eliminarUsuario = () => {
-        alert("Usuario eliminado (simulado).");
-        // Aquí también iría la lógica real de eliminación
+        alert("Usuario eliminado (ojo es simulado)");
     };
 
-    // Renderizo el panel de administrador
     return (
         <div className="admin-panel">
             <h2>Panel de Administrador</h2>
 
-            {/* Sección para eliminar una fruta */}
+            {/* Eliminar fruta */}
             <div className="admin-section">
                 <h3>Eliminar una fruta</h3>
                 <input
@@ -79,14 +64,14 @@ export const AdminPanel: React.FC = () => {
                 </button>
             </div>
 
-            {/* Sección para eliminar un usuario */}
+            {/* Eliminar usuario */}
             <div className="admin-section">
                 <h3>Eliminar un usuario</h3>
                 <input
                     type="text"
-                    placeholder="Nombre"
-                    value={buscarUsuario.nombre}
-                    onChange={(e) => setBuscarUsuario({ ...buscarUsuario, nombre: e.target.value })}
+                    placeholder="Usuario"
+                    value={buscarUsuario.username}
+                    onChange={(e) => setBuscarUsuario({ ...buscarUsuario, username: e.target.value })}
                 />
                 <input
                     type="text"
@@ -99,7 +84,7 @@ export const AdminPanel: React.FC = () => {
                 </button>
             </div>
 
-            {/* Sección para ver todas las frutas registradas */}
+            {/* Ver frutas */}
             <div className="admin-section">
                 <h3>Ver frutas</h3>
                 <table>
@@ -120,20 +105,20 @@ export const AdminPanel: React.FC = () => {
                 </table>
             </div>
 
-            {/* Sección para ver todos los usuarios */}
+            {/* Ver usuarios */}
             <div className="admin-section">
                 <h3>Ver usuarios</h3>
                 <table>
                     <thead>
                     <tr>
-                        <th>Nombre</th>
+                        <th>Usuario</th>
                         <th>Email</th>
                     </tr>
                     </thead>
                     <tbody>
                     {usuarios.map((u) => (
-                        <tr key={u.id}>
-                            <td>{u.nombre}</td>
+                        <tr key={u.username}>
+                            <td>{u.username}</td>
                             <td>{u.email}</td>
                         </tr>
                     ))}

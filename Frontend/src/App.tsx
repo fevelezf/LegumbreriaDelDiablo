@@ -5,7 +5,7 @@ import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
 import { Home } from "./views/Home";
 import { Login } from "./views/Login";
-import { Register } from "./views/Register.tsx";
+import { Register } from "./views/Register";
 import { Catalogo } from "./views/Catalogo";
 import { DetalleFruta } from "./views/DetalleFruta";
 import { BuscarFruta } from "./views/BuscarFruta";
@@ -15,7 +15,7 @@ import { NotFound } from "./views/NotFound";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import { AuthProvider } from "./context/AuthContext";
 
-import "./App.css";
+import "./App.css"; // contiene layout general
 
 export const App: React.FC = () => {
     return (
@@ -54,4 +54,3 @@ export const App: React.FC = () => {
         </AuthProvider>
     );
 };
-

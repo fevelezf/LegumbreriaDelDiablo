@@ -2,7 +2,15 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import "../styles/Login.css";
-import loginImage from "../assets/login.jpg";
+import loginImage from "../assets/login.png";
+import usuarios from "../data/usuarios.json"; // ✅ importamos el JSON local
+
+type Usuario = {
+    username: string;
+    password: string;
+    email: string;
+    role: "admin" | "usuario";
+};
 
 export const Login: React.FC = () => {
     const [usuario, setUsuario] = useState("");
@@ -13,12 +21,18 @@ export const Login: React.FC = () => {
     const navigate = useNavigate();
 
     const handleLogin = () => {
-        if (usuario === "admin" && password === "admin123") {
-            login({ username: "admin", email: "admin@mail.com", role: "admin" });
-            navigate("/admin");
-        } else if (usuario === "pipe" && password === "123") {
-            login({ username: "pipelotas", email: "pipe@mail.com", role: "usuario" });
-            navigate("/catalogo");
+        const userFound = (usuarios as Usuario[]).find(
+            (u) => u.username === usuario && u.password === password
+        );
+
+        if (userFound) {
+            login({
+                username: userFound.username,
+                email: userFound.email,
+                role: userFound.role,
+            });
+
+            navigate(userFound.role === "admin" ? "/admin" : "/catalogo");
         } else {
             setError("Usuario o contraseña incorrectos.");
         }
@@ -34,7 +48,7 @@ export const Login: React.FC = () => {
             {/* Columna derecha: formulario */}
             <div className="login-form-container">
                 <div className="login-form-content">
-                    <h2>Bienvenido de Vuelta a la Legumbreria del Diablo</h2>
+                    <h2>Bienvenido de Vuelta a la Legumbrería del Diablo</h2>
                     {error && <p className="error-msg">{error}</p>}
 
                     <input
@@ -52,7 +66,6 @@ export const Login: React.FC = () => {
                     />
 
                     <button onClick={handleLogin}>Entrar</button>
-                    <></>
 
                     <p className="registro-link">
                         ¿No tienes cuenta? <a href="/register">Regístrate</a>

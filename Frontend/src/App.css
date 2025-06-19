@@ -1,13 +1,15 @@
-/* src/styles/App.css */
+/* src/App.css */
 
-body {
+html, body, #root {
   margin: 0;
+  padding: 0;
+  height: 100%;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
   background-color: #0f0f0f;
   color: white;
-  font-family: 'Segoe UI', sans-serif;
-  min-height: 100vh;
+  overflow-x: hidden; /* Evita scroll horizontal */
 }
-
 
 .app-container {
   display: flex;
@@ -17,6 +19,8 @@ body {
 
 .main-container {
   flex: 1;
-  padding: 2rem;
+  padding-top: 60px; /* espacio para navbar fija */
+  box-sizing: border-box;
+  width: 100%;
+  overflow-x: hidden;
 }
-

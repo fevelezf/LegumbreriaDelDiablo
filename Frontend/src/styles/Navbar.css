@@ -2,19 +2,17 @@
     position: fixed;
     top: 0;
     left: 0;
-    width: 100vw;
+    width: 100%; /* ✅ evita desbordamiento horizontal */
     height: 60px;
-    background-color: #a7c7e7;
+    background: linear-gradient(to right, #9a4eae, #4f28aa);
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 0 2rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     z-index: 1000;
     box-sizing: border-box;
-    
-    background: linear-gradient(to right, #9a4eae, #4f28aa);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    flex-wrap: wrap; /* ✅ permite saltar línea en móvil */
 }
 
 .navbar-left img.navbar-logo {
@@ -51,29 +49,31 @@
     align-items: center;
 }
 
-/* Responsive para pantallas pequeñas */
+/* ✅ Responsive para pantallas pequeñas */
 @media only screen and (max-width: 768px) {
     .navbar {
         flex-direction: column;
         height: auto;
-        padding: 1rem;
-        align-items: flex-start;
-    }
-
-    .navbar-center {
-        flex-direction: column;
-        width: 100%;
-        gap: 0.8rem;
-        margin: 1rem 0;
-    }
-
-    .navbar-right {
-        flex-direction: column;
-        width: 100%;
-        gap: 0.5rem;
+        padding: 1rem 1rem;
+        align-items: center;
     }
 
     .navbar-left {
-        align-self: center;
+        margin-bottom: 0.5rem;
+    }
+
+    .navbar-center,
+    .navbar-right {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        gap: 0.8rem;
+        margin-bottom: 0.8rem;
+    }
+
+    .navbar-center a,
+    .navbar-login-button {
+        width: 100%;
+        text-align: center;
     }
 }

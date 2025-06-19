@@ -1,12 +1,10 @@
-// Importo lo necesario
-import { useParams } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useParams, Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useAuth } from "../context/AuthContext";
 import "../styles/DetalleFruta.css";
-import gomuImg from "../assets/gomu.jpeg";
-import meraImg from "../assets/mera.jpg";
-import opeImg from "../assets/opeope.jpeg";
+import frutasData from "../data/frutas.json";
+import { VolverButton } from "../components/VolverButton"; // ✅ botón de volver
 
-// Defino tipos
 type Comentario = {
     usuario: string;
     texto: string;
@@ -22,85 +20,45 @@ type Fruta = {
     imagen: string;
 };
 
-// Componente principal
 export const DetalleFruta: React.FC = () => {
-    // Obtengo el ID desde la URL
     const { id } = useParams();
+    const { user } = useAuth();
 
-    // Estado para la fruta específica
     const [fruta, setFruta] = useState<Fruta | null>(null);
-
-    // Estado para comentarios
     const [comentarios, setComentarios] = useState<Comentario[]>([]);
-
-    // Estado para el nuevo comentario
     const [nuevoComentario, setNuevoComentario] = useState({
-        usuario: "",
         texto: "",
         rating: 5,
     });
 
-    // Simulación de carga de datos
     useEffect(() => {
-        // Datos simulados
-        const frutasDB: Fruta[] = [
-            {
-                id: "1",
-                nombre: "Gomu Gomu no Mi",
-                tipo: "Paramecia",
-                descripcion: "Descripción: Convierte el cuerpo del usuario en goma elástica,\n"
-                +"permitiéndole estirarse, rebotar y resistir impactos físicos.\n"
-                +"Más adelante se revela que es la Hito Hito no Mi, modelo: Nika,\n" 
-                +"una fruta mítica con habilidades de transformación y combate caricaturesco.",
-                historia: "Encontrada por Shanks y consumida por Luffy.",
-                imagen: gomuImg,
-            },
-            {
-                id: "2",
-                nombre: "Mera Mera no Mi",
-                tipo: "Logia",
-                descripcion: "Permite al usuario convertirse en fuego, generar llamas a voluntad \n"
-                +"y lanzar ataques ígneos devastadores. Fue usada por Portgas D. Ace y luego por Sabo.",
-                historia: "Perteneció a Portgas D. Ace.",
-                imagen: meraImg,
-            },
-            {
-                id: "3",
-                nombre: "Ope ope no Mi",
-                tipo: "Logia",
-                descripcion: "Permite crear una “sala” en la que el usuario puede manipular todo a \n"
-                +"su antojo como si hiciera cirugía: teletransportar, cortar sin dañar, intercambiar\n"
-                +"almas y hasta otorgar la inmortalidad con una técnica especial. Usada por Trafalgar D. Water Law.",
-                historia: "Perteneció a  Trafalgar D. Law.",
-                imagen: opeImg,
-            },
-        ];
-
-        // Busco la fruta por ID
-        const frutaEncontrada = frutasDB.find((f) => f.id === id);
-        if (frutaEncontrada) setFruta(frutaEncontrada);
-
-        // Comentarios simulados
-        setComentarios([
-            { usuario: "Zoro", texto: "¡Muy poderosa!", rating: 5 },
-            { usuario: "Nami", texto: "Algo peligrosa...", rating: 3 },
-        ]);
+        const frutaEncontrada = frutasData.find((f) => f.id === id);
+        if (frutaEncontrada) {
+            setFruta(frutaEncontrada);
+            setComentarios([
+                { usuario: "Zoro", texto: "¡Poder brutal!", rating: 5 },
+                { usuario: "Nami", texto: "Me da miedo 😅", rating: 3 },
+            ]);
+        }
     }, [id]);
 
-    // Manejar envío de nuevo comentario
     const enviarComentario = () => {
-        if (!nuevoComentario.usuario || !nuevoComentario.texto) return;
+        if (!nuevoComentario.texto.trim()) return;
 
-        setComentarios((prev) => [...prev, nuevoComentario]);
-        setNuevoComentario({ usuario: "", texto: "", rating: 5 });
+        const comentario: Comentario = {
+            usuario: user?.username || "Anónimo",
+            texto: nuevoComentario.texto,
+            rating: nuevoComentario.rating,
+        };
+
+        setComentarios((prev) => [...prev, comentario]);
+        setNuevoComentario({ texto: "", rating: 5 });
     };
 
-    // Si no se encuentra la fruta
     if (!fruta) {
         return <p style={{ textAlign: "center", padding: "2rem" }}>Fruta no encontrada.</p>;
     }
 
-    // Renderizado de la fruta
     return (
         <div className="detalle-fruta">
             <h2>{fruta.nombre}</h2>
@@ -115,55 +73,55 @@ export const DetalleFruta: React.FC = () => {
                 </div>
             </div>
 
-            {/* Comentarios */}
             <div className="comentarios">
-                <h3>Comentarios y Calificaciones</h3>
-                {comentarios.map((c, index) => (
-                    <div className="comentario" key={index}>
+                <h3>Experiencias y Opiniones</h3>
+                {comentarios.map((c, i) => (
+                    <div key={i} className="comentario">
                         <strong>{c.usuario}</strong> - {c.rating}⭐<br />
                         <em>{c.texto}</em>
                     </div>
                 ))}
             </div>
 
-            {/* Formulario para comentar */}
-            <div className="form-comentario">
-                <h4>Escribe tu comentario</h4>
-                <input
-                    type="text"
-                    placeholder="Tu nombre"
-                    value={nuevoComentario.usuario}
-                    onChange={(e) =>
-                        setNuevoComentario({ ...nuevoComentario, usuario: e.target.value })
-                    }
-                />
-                <textarea
-                    placeholder="Tu opinión..."
-                    value={nuevoComentario.texto}
-                    onChange={(e) =>
-                        setNuevoComentario({ ...nuevoComentario, texto: e.target.value })
-                    }
-                ></textarea>
-                <label>
-                    Calificación:
-                    <select
-                        value={nuevoComentario.rating}
+            {user ? (
+                <div className="form-comentario">
+                    <h4>¿Has probado esta fruta? Cuéntanos qué piensas</h4>
+
+                    <textarea
+                        placeholder="Tu opinión..."
+                        value={nuevoComentario.texto}
                         onChange={(e) =>
-                            setNuevoComentario({
-                                ...nuevoComentario,
-                                rating: parseInt(e.target.value),
-                            })
+                            setNuevoComentario({ ...nuevoComentario, texto: e.target.value })
                         }
-                    >
-                        {[1, 2, 3, 4, 5].map((n) => (
-                            <option key={n} value={n}>
-                                {n}
-                            </option>
-                        ))}
-                    </select>
-                </label>
-                <button onClick={enviarComentario}>Publicar</button>
-            </div>
+                    ></textarea>
+
+                    <label>
+                        Calificación:
+                        <select
+                            value={nuevoComentario.rating}
+                            onChange={(e) =>
+                                setNuevoComentario({
+                                    ...nuevoComentario,
+                                    rating: parseInt(e.target.value),
+                                })
+                            }
+                        >
+                            {[1, 2, 3, 4, 5].map((n) => (
+                                <option key={n} value={n}>{n}</option>
+                            ))}
+                        </select>
+                    </label>
+
+                    <button onClick={enviarComentario}>Publicar</button>
+                </div>
+            ) : (
+                <p className="login-requerido">
+                    🔒 Debes <Link to="/login">iniciar sesión</Link> para comentar esta fruta.
+                </p>
+            )}
+
+            {/* ✅ Botón de volver al catálogo */}
+            <VolverButton ruta="/catalogo" />
         </div>
     );
 };

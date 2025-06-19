@@ -1,0 +1,27 @@
+[
+  {
+    "id": "1",
+    "nombre": "Gomu Gomu no Mi",
+    "tipo": "Paramecia",
+    "descripcion": "Convierte al usuario en goma.",
+    "historia": "Consumida por Monkey D. Luffy.",
+    "imagen": "/gomu.jpeg"
+  },
+  {
+    "id": "2",
+    "nombre": "Mera Mera no Mi",
+    "tipo": "Logia",
+    "descripcion": "Otorga control del fuego.",
+    "historia": "Consumida por Ace.",
+    "imagen": "/mera.jpg"
+  },
+  {
+    "id": "3",
+    "nombre": "Ope Ope no Mi",
+    "tipo": "Paramecia",
+    "descripcion": "Permite crear un área quirúrgica donde el usuario puede manipular cualquier cosa como en una operación.",
+    "historia": "Consumida por Trafalgffar D. Water Law.",
+    "imagen": "/opeope.jpeg"
+  }
+]
+

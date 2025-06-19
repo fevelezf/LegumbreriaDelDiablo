@@ -1,0 +1,26 @@
+[
+  {
+    "username": "adminchanci",
+    "password": "chanci123",
+    "email": "chanci@gmail.com",
+    "role": "admin"
+  },
+  {
+    "username": "adminsebas",
+    "password": "sebas123",
+    "email": "sebas@gmail.com",
+    "role": "admin"
+  },
+  {
+    "username": "pipevefe",
+    "password": "123",
+    "email": "pipevefe@gmail.com",
+    "role": "usuario"
+  },
+  {
+    "username": "pipetame",
+    "password": "123",
+    "email": "pipetame@gmail.com",
+    "role": "usuario"
+  }
+]

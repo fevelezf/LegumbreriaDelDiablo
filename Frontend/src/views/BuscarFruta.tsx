@@ -1,48 +1,27 @@
-// Importo hooks necesarios y estilos
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "../styles/BuscarFruta.css";
+import { VolverButton } from "../components/VolverButton";
+import frutasData from "../data/frutas.json"; // ✅ Importamos JSON localmente
 
-// Tipo de dato para una fruta
 type Fruta = {
     id: string;
     nombre: string;
     tipo: string;
     descripcion: string;
+    imagen?: string;
 };
 
-// Componente funcional para la búsqueda de frutas
 export const BuscarFruta: React.FC = () => {
-    // Estado para filtros de búsqueda
+    const navigate = useNavigate();
+
     const [filtros, setFiltros] = useState({ nombre: "", tipo: "" });
-
-    // Estado para resultados simulados
     const [resultados, setResultados] = useState<Fruta[]>([]);
+    const [buscado, setBuscado] = useState(false);
 
-    // Frutas simuladas para mostrar resultados
-    const frutasSimuladas: Fruta[] = [
-        {
-            id: "1",
-            nombre: "Gomu Gomu no Mi",
-            tipo: "Paramecia",
-            descripcion: "Convierte el cuerpo en goma.",
-        },
-        {
-            id: "2",
-            nombre: "Mera Mera no Mi",
-            tipo: "Logia",
-            descripcion: "Permite controlar fuego.",
-        },
-        {
-            id: "3",
-            nombre: "Hie Hie no Mi",
-            tipo: "Logia",
-            descripcion: "Permite controlar hielo.",
-        },
-    ];
-
-    // Función que filtra frutas según los campos
+    // ✅ búsqueda desde JSON
     const buscarFrutas = () => {
-        const filtradas = frutasSimuladas.filter((fruta) => {
+        const filtradas = frutasData.filter((fruta) => {
             const coincideNombre = fruta.nombre
                 .toLowerCase()
                 .includes(filtros.nombre.toLowerCase());
@@ -53,13 +32,13 @@ export const BuscarFruta: React.FC = () => {
         });
 
         setResultados(filtradas);
+        setBuscado(true);
     };
 
     return (
         <div className="buscar-container">
             <h2>Buscar Fruta del Diablo</h2>
 
-            {/* Formulario de búsqueda */}
             <div className="formulario-busqueda">
                 <input
                     type="text"
@@ -67,25 +46,26 @@ export const BuscarFruta: React.FC = () => {
                     value={filtros.nombre}
                     onChange={(e) => setFiltros({ ...filtros, nombre: e.target.value })}
                 />
-
                 <input
                     type="text"
                     placeholder="Tipo (Logia, Paramecia, Zoan)"
                     value={filtros.tipo}
                     onChange={(e) => setFiltros({ ...filtros, tipo: e.target.value })}
                 />
-
                 <button onClick={buscarFrutas}>Buscar</button>
             </div>
 
-            {/* Resultados */}
             <div className="resultados">
-                {resultados.length === 0 ? (
-                    <p>No se han encontrado frutas aún.</p>
+                {buscado && resultados.length === 0 ? (
+                    <p className="mensaje-vacio">No se han encontrado frutas.</p>
                 ) : (
                     <ul>
                         {resultados.map((fruta) => (
-                            <li key={fruta.id}>
+                            <li
+                                key={fruta.id}
+                                className="resultado-clickable"
+                                onClick={() => navigate(`/detalle/${fruta.id}`)}
+                            >
                                 <strong>{fruta.nombre}</strong> ({fruta.tipo})<br />
                                 <em>{fruta.descripcion}</em>
                             </li>
@@ -93,6 +73,8 @@ export const BuscarFruta: React.FC = () => {
                     </ul>
                 )}
             </div>
+
+            <VolverButton ruta="/catalogo" />
         </div>
     );
 };
