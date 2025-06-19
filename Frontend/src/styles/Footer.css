@@ -9,6 +9,7 @@
     box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.2);
     box-sizing: border-box;
     margin-top: auto;
+    font-family: 'Pirata One', cursive;
 }
 
 /* Responsive ajuste de fuente para móviles */

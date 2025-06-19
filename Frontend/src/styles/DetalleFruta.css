@@ -3,13 +3,21 @@
     margin: auto;
     padding: 2rem;
     color: white;
+    font-family:  'Pirata One', cursive;
 }
+.detalle-fruta h2 {
+    text-align: center;
+    font-size: 2.2rem;
+    margin-bottom: 1.5rem;
+}
+
 
 .detalle-contenido {
     display: flex;
     flex-wrap: wrap;
     gap: 2rem;
     margin-bottom: 2rem;
+
 }
 
 .detalle-contenido img {

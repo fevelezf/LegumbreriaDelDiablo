@@ -36,13 +36,12 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         localStorage.removeItem("authUser");
     };
 
-    // Al cargar la app, para recuperar el usuario desde localStorage
     React.useEffect(() => {
         const storedUser = localStorage.getItem("authUser");
         if (storedUser) setUser(JSON.parse(storedUser));
     }, []);
 
-    // da el contexto a los hijos
+
     return (
         <AuthContext.Provider value={{ user, login, logout }}>
             {children}

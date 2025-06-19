@@ -1,0 +1,49 @@
+.tyc-container {
+    max-width: 800px;
+    margin: auto;
+    padding: 4rem 2rem 2rem;
+    background-color: #111;
+    color: #f1f1f1;
+    font-family: 'Pirata One', cursive;
+}
+
+.tyc-container h1 {
+    text-align: center;
+    color: #ffcc00;
+    margin-bottom: 2rem;
+}
+
+.tyc-container ul {
+    margin-left: 1.5rem;
+    margin-bottom: 1.5rem;
+    list-style-type: disc;
+}
+
+.tyc-container li {
+    margin-bottom: 0.8rem;
+    line-height: 1.5;
+}
+
+.tyc-container p {
+    margin-bottom: 1.2rem;
+    line-height: 1.6;
+}
+.continuar-btn {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    padding: 0.7rem 1.5rem;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 2rem;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: 'Pirata One', cursive;
+}
+
+.continuar-btn:hover {
+    background-color: #43a047;
+}
+

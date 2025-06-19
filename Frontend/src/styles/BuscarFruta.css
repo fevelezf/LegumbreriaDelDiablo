@@ -1,9 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Pirata+One&display=swap');
+
 .buscar-container {
     padding: 6rem 2rem 2rem;
     min-height: 100vh;
     background-color: #0f0f0f;
     color: white;
     box-sizing: border-box;
+    font-family: 'Pirata One', cursive;
 }
 
 .buscar-container h2 {
@@ -37,6 +40,7 @@
     color: white;
     width: 250px;
     min-width: 200px;
+    font-family: 'Pirata One', cursive;
 }
 
 .formulario-busqueda button {
@@ -48,6 +52,7 @@
     cursor: pointer;
     font-weight: bold;
     white-space: nowrap;
+    font-family: 'Pirata One', cursive;
 }
 
 .formulario-busqueda button:hover {

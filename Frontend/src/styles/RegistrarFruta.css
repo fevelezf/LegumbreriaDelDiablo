@@ -4,7 +4,7 @@
   width: 100vw;
 }
 
-/* Imagen lateral */
+
 .registrar-image {
   flex: 1;
   background-color: #111;
@@ -21,11 +21,11 @@
   object-fit: contain;
 }
 
-/* Formulario */
+
 .registrar-form-container {
   flex: 1;
   background-color: #1a1a1a;
-  color: white;
+  color: #ffcc00;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -45,20 +45,34 @@
   text-align: center;
 }
 
+
 .registrar-form-content input,
-.registrar-form-content textarea {
+.registrar-form-content textarea,
+.registrar-form-content select {
+  width: 100%;
   padding: 0.7rem;
   margin-bottom: 1rem;
   background-color: #2c2c2c;
   border: none;
   border-radius: 6px;
   color: white;
+  font-size: 1rem;
+  box-sizing: border-box;
 }
 
 .registrar-form-content textarea {
   min-height: 100px;
   resize: vertical;
 }
+
+.registrar-form-content select {
+  appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg fill='white' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'><path d='M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.25 8.27a.75.75 0 01-.02-1.06z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 1rem;
+}
+
 
 .registrar-form-content button {
   background-color: #3f51b5;
@@ -74,6 +88,7 @@
   background-color: #303f9f;
 }
 
+
 .mensaje {
   background-color: #4caf50;
   padding: 0.5rem;
@@ -82,7 +97,7 @@
   text-align: center;
 }
 
-/* Responsive */
+
 @media (max-width: 768px) {
   .registrar-wrapper {
     flex-direction: column;

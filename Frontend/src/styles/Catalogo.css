@@ -5,6 +5,7 @@
     box-sizing: border-box;
     min-height: 100vh;
     background-color: #0f0f0f;
+    font-family: 'Pirata One', cursive;
 }
 
 .catalogo-container h2 {

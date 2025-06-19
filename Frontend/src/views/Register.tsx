@@ -1,20 +1,25 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState} from "react";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import "../styles/Register.css";
 import signinImage from "../assets/signin.png";
 
 export const Register: React.FC = () => {
+    const navigate = useNavigate();
+    const location = useLocation();
+    const { login } = useAuth();
+
+    const estadoPrevio = location.state || {};
+
     const [form, setForm] = useState({
-        nombre: "",
-        email: "",
-        username: "",
-        password: "",
+        nombre: estadoPrevio.form?.nombre || "",
+        email: estadoPrevio.form?.email || "",
+        username: estadoPrevio.form?.username || "",
+        password: estadoPrevio.form?.password || "",
     });
 
+    const [aceptaTerminos, setAceptaTerminos] = useState(estadoPrevio.aceptaTerminos || false);
     const [error, setError] = useState("");
-    const { login } = useAuth();
-    const navigate = useNavigate();
 
     const validarPassword = (pass: string) => {
         return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/.test(pass);
@@ -35,21 +40,21 @@ export const Register: React.FC = () => {
             return;
         }
 
-        // Simulación de registro exitoso
+        if (!aceptaTerminos) {
+            setError("Debes aceptar los términos y condiciones para registrarte.");
+            return;
+        }
+
         login({ username, email, role: "usuario" });
         navigate("/catalogo");
     };
 
     return (
         <div className="register-wrapper">
-            {/* Columna izquierda: imagen */}
             <div className="register-image">
-                <img src={signinImage
-                
-                } alt="Fruta del Diablo" />
+                <img src={signinImage} alt="Fruta del Diablo" />
             </div>
 
-            {/* Columna derecha: formulario */}
             <div className="register-form-container">
                 <div className="register-form-content">
                     <h2>Regístrate y encuentra tu fruta prohibida</h2>
@@ -87,6 +92,22 @@ export const Register: React.FC = () => {
                     <p className="password-hint">
                         Tu contraseña debe tener al menos 8 caracteres, incluyendo mayúsculas, minúsculas y números.
                     </p>
+
+                    <label className="terminos-label">
+                        <input
+                            type="checkbox"
+                            checked={aceptaTerminos}
+                            onChange={(e) => setAceptaTerminos(e.target.checked)}
+                        />
+                        &nbsp;Acepto los{" "}
+                        <Link
+                            to="/terminos"
+                            state={{ form, aceptaTerminos }}
+                            className="terminos-link"
+                        >
+                            términos y condiciones
+                        </Link>
+                    </label>
 
                     <button onClick={handleSubmit}>Registrarse</button>
                 </div>

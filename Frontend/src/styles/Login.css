@@ -25,20 +25,22 @@
 .login-form-container {
     flex: 1;
     background-color: #1a1a1a;
-    color: white;
+    color: #ffcc00;
     display: flex;
     justify-content: center; /* centra horizontalmente */
     align-items: center;     /* centra verticalmente */
     padding: 2rem;
+    font-family: 'Pirata One', cursive;
 }
 
-/* NUEVO: contenedor interno con ancho limitado */
+
 .login-form-content {
     width: 100%;
     max-width: 400px;
     display: flex;
     flex-direction: column;
     align-items: stretch;
+    font-family: 'Pirata One', cursive;
 }
 
 .login-form-content h2 {

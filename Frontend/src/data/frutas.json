@@ -5,7 +5,7 @@
     "tipo": "Paramecia",
     "descripcion": "Convierte al usuario en goma.",
     "historia": "Consumida por Monkey D. Luffy.",
-    "imagen": "/gomu.jpeg"
+    "imagen": "/gomu.png"
   },
   {
     "id": "2",
@@ -13,7 +13,7 @@
     "tipo": "Logia",
     "descripcion": "Otorga control del fuego.",
     "historia": "Consumida por Ace.",
-    "imagen": "/mera.jpg"
+    "imagen": "/mera.png"
   },
   {
     "id": "3",
@@ -21,7 +21,7 @@
     "tipo": "Paramecia",
     "descripcion": "Permite crear un área quirúrgica donde el usuario puede manipular cualquier cosa como en una operación.",
     "historia": "Consumida por Trafalgffar D. Water Law.",
-    "imagen": "/opeope.jpeg"
+    "imagen": "/opeope.png"
   }
 ]
 

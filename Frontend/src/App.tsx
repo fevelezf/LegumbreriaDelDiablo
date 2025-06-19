@@ -12,8 +12,9 @@ import { AdminPanel } from "./views/AdminPanel";
 import { NotFound } from "./views/NotFound";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import { AuthProvider } from "./context/AuthContext";
+import { Tyc } from "./views/Tyc";
 
-import "./App.css"; // contiene layout general
+import "./App.css";
 
 export const App: React.FC = () => {
     return (
@@ -27,6 +28,7 @@ export const App: React.FC = () => {
                         <Route path="/register" element={<Register />} />
                         <Route path="/catalogo" element={<Catalogo />} />
                         <Route path="/detalle/:id" element={<DetalleFruta />} />
+                        <Route path="/terminos" element={<Tyc />} />
                         <Route path="/buscar" element={<BuscarFruta />} />
                         <Route
                             path="/registrar"

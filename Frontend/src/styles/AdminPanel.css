@@ -50,3 +50,13 @@ th, td {
     padding: 0.5rem;
     text-align: left;
 }
+.admin-panel {
+    font-family: 'Pirata One', cursive; /* o Bangers, Luckiest Guy, etc */
+    color: white;
+    max-width: 900px;
+    margin: auto;
+    padding: 2rem;
+    background-color: #181818;
+    border-radius: 8px;
+}
+

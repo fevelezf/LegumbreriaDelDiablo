@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import "../styles/AdminPanel.css";
-
 import frutasData from "../data/frutas.json";
 import usuariosData from "../data/usuarios.json";
 

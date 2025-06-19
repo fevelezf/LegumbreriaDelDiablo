@@ -5,7 +5,7 @@ import "../styles/NotFound.css";
 export const NotFound: React.FC = () => {
     return (
         <div className="notfound-container">
-            <h1>🌀 404 - Fruta no encontrada</h1>
+            <h1>🌀 404 - PAGINA NO ENCONTRADA</h1>
             <p>
                 Parece que te adentraste demasiado en el Nuevo Mundo...
                 <br />

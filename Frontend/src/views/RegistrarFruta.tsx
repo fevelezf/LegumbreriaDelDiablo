@@ -13,7 +13,7 @@ export const RegistrarFruta: React.FC = () => {
   const [mensaje, setMensaje] = useState("");
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+      e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
     setForm({ ...form, [name]: value });
@@ -21,12 +21,39 @@ export const RegistrarFruta: React.FC = () => {
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const archivo = e.target.files?.[0] || null;
-    setForm({ ...form, imagen: archivo });
+
+    if (!archivo) return;
+
+    // Validar extensión
+    if (archivo.type !== "image/png") {
+      setMensaje("❌ Solo se permiten imágenes en formato PNG.");
+      return;
+    }
+
+    // Validar dimensiones
+    const reader = new FileReader();
+    reader.onload = function (event) {
+      const img = new Image();
+      img.onload = function () {
+        if (img.width > 250 || img.height > 250) {
+          setMensaje("❌ La imagen no debe superar los 250x250 píxeles.");
+          setForm({ ...form, imagen: null });
+        } else {
+          setForm({ ...form, imagen: archivo });
+          setMensaje(""); // limpiar mensaje si todo está bien
+        }
+      };
+      if (typeof event.target?.result === "string") {
+        img.src = event.target.result;
+      }
+    };
+
+    reader.readAsDataURL(archivo);
   };
 
   const handleSubmit = () => {
     if (!form.nombre || !form.descripcion || !form.tipo || !form.imagen) {
-      setMensaje("Por favor completa todos los campos.");
+      setMensaje("⚠️ Por favor completa todos los campos y sube una imagen válida.");
       return;
     }
 
@@ -42,50 +69,54 @@ export const RegistrarFruta: React.FC = () => {
   };
 
   return (
-    <div className="registrar-wrapper">
-      {/* Columna izquierda: imagen */}
-      <div className="registrar-image">
-        <img src={frutaImage} alt="Fruta decorativa" />
-      </div>
+      <div className="registrar-wrapper">
+        {/* Columna izquierda: imagen */}
+        <div className="registrar-image">
+          <img src={frutaImage} alt="Fruta decorativa" />
+        </div>
 
-      {/* Columna derecha: formulario */}
-      <div className="registrar-form-container">
-        <div className="registrar-form-content">
-          <h2>Registrar una nueva Fruta del Diablo</h2>
-          {mensaje && <p className="mensaje">{mensaje}</p>}
+        {/* Columna derecha: formulario */}
+        <div className="registrar-form-container">
+          <div className="registrar-form-content">
+            <h2>Registrar una nueva Fruta del Diablo</h2>
+            {mensaje && <p className="mensaje">{mensaje}</p>}
 
-          <input
-            type="text"
-            name="nombre"
-            placeholder="Nombre de la fruta"
-            value={form.nombre}
-            onChange={handleChange}
-          />
+            <input
+                type="text"
+                name="nombre"
+                placeholder="Nombre de la fruta"
+                value={form.nombre}
+                onChange={handleChange}
+            />
 
-          <textarea
-            name="descripcion"
-            placeholder="Descripción de los efectos"
-            value={form.descripcion}
-            onChange={handleChange}
-          ></textarea>
+            <textarea
+                name="descripcion"
+                placeholder="Descripción de los efectos"
+                value={form.descripcion}
+                onChange={handleChange}
+            ></textarea>
 
-          <input
-            type="text"
-            name="tipo"
-            placeholder="Tipo de fruta (Logia, Paramecia, Zoan)"
-            value={form.tipo}
-            onChange={handleChange}
-          />
+            <select
+                name="tipo"
+                value={form.tipo}
+                onChange={handleChange}
+            >
+              <option value="">Selecciona un tipo de fruta</option>
+              <option value="Paramecia">Paramecia</option>
+              <option value="Zoan">Zoan</option>
+              <option value="Logia">Logia</option>
+            </select>
 
-          <input
-            type="file"
-            accept="image/png, image/jpeg, image/gif"
-            onChange={handleFileChange}
-          />
 
-          <button onClick={handleSubmit}>Subir Fruta</button>
+            <input
+                type="file"
+                accept="image/png"
+                onChange={handleFileChange}
+            />
+
+            <button onClick={handleSubmit}>Subir Fruta</button>
+          </div>
         </div>
       </div>
-    </div>
   );
 };
