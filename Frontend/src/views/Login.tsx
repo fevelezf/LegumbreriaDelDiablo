@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import "../styles/Login.css";
 import loginImage from "../assets/login.png";
-import usuarios from "../data/usuarios.json"; // ✅ importamos el JSON local
+import usuarios from "../data/usuarios.json"; // JSON local
 
 type Usuario = {
     username: string;

@@ -1,5 +1,3 @@
-// src/components/Navbar.tsx
-
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import "../styles/Navbar.css";
@@ -16,21 +14,21 @@ export const Navbar: React.FC = () => {
 
     return (
         <nav className="navbar">
-            {/* Logo opcional */}
+            {/* Logo */}
             <div className="navbar-left">
                 <Link to="/">
                     <img src={logo} alt="logo" className="navbar-logo" />
                 </Link>
             </div>
 
-            {/* Enlaces de navegación */}
+            {/* enlaces para ir a otra pagina */}
             <div className="navbar-center">
                 <Link to="/">Inicio</Link>
                 <Link to="/buscar">Buscar una fruta</Link>
                 {user && <Link to="/registrar">Agregar fruta</Link>}
             </div>
 
-            {/* Acciones de autenticación */}
+            {/* autenticación */}
             <div className="navbar-right">
                 {user ? (
                     <>

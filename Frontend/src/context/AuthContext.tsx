@@ -9,7 +9,7 @@ type UserType = {
     role: "usuario" | "admin";
 };
 
-// Define el tipo del contexto, con lo que se puede usar en la app
+
 type AuthContextType = {
     user: UserType | null; // Usuario autenticado, o null si no está logueado
     login: (userData: UserType) => void; // Función para iniciar sesión
@@ -19,15 +19,15 @@ type AuthContextType = {
 // Crea el contexto
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-// proveedor que se usa en App.tsx
+
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-    // Estado que mantiene al usuario actual
+    // Estado que mantiene al usuario que esta en la sesion
     const [user, setUser] = useState<UserType | null>(null);
 
     // Función para iniciar sesión: guarda los datos del usuario en el estado y en localStorage
     const login = (userData: UserType) => {
         setUser(userData);
-        localStorage.setItem("authUser", JSON.stringify(userData)); // Persiste en el navegador
+        localStorage.setItem("authUser", JSON.stringify(userData));
     };
 
     // Función para cerrar sesión: borra los datos del usuario
@@ -36,13 +36,13 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         localStorage.removeItem("authUser");
     };
 
-    // Al cargar la app, intenta recuperar el usuario desde localStorage
+    // Al cargar la app, para recuperar el usuario desde localStorage
     React.useEffect(() => {
         const storedUser = localStorage.getItem("authUser");
-        if (storedUser) setUser(JSON.parse(storedUser)); // Si existe, lo asigna al estado
+        if (storedUser) setUser(JSON.parse(storedUser));
     }, []);
 
-    // Provee el contexto a los hijos
+    // da el contexto a los hijos
     return (
         <AuthContext.Provider value={{ user, login, logout }}>
             {children}
@@ -50,7 +50,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     );
 };
 
-// Hook personalizado para consumir el contexto más fácilmente
+
 export const useAuth = () => {
     const context = useContext(AuthContext);
     if (!context) {

@@ -1,5 +1,3 @@
-// src/views/RegistrarFruta.tsx
-
 import { useState } from "react";
 import "../styles/RegistrarFruta.css";
 import frutaImage from "../assets/RegistrarFruta.png";

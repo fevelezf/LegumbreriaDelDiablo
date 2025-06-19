@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/BuscarFruta.css";
 import { VolverButton } from "../components/VolverButton";
-import frutasData from "../data/frutas.json"; // ✅ Importamos JSON localmente
+import frutasData from "../data/frutas.json";
 
 type Fruta = {
     id: string;
@@ -19,7 +19,7 @@ export const BuscarFruta: React.FC = () => {
     const [resultados, setResultados] = useState<Fruta[]>([]);
     const [buscado, setBuscado] = useState(false);
 
-    // ✅ búsqueda desde JSON
+    // búsqueda desde JSON
     const buscarFrutas = () => {
         const filtradas = frutasData.filter((fruta) => {
             const coincideNombre = fruta.nombre

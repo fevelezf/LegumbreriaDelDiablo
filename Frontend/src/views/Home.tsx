@@ -1,4 +1,3 @@
-// Importo navegador y estilos
 import { useNavigate } from "react-router-dom";
 import "../styles/Home.css";
 
@@ -8,7 +7,7 @@ export const Home: React.FC = () => {
 
     return (
         <div className="home-container">
-            {/* Capa oscura sobre el fondo para legibilidad */}
+
             <div className="overlay"></div>
 
             <div className="home-content">

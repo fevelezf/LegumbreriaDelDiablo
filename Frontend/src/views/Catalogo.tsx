@@ -1,4 +1,3 @@
-// Importo React y los hooks necesarios
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/Catalogo.css";
@@ -21,12 +20,12 @@ export const Catalogo: React.FC = () => {
     // Estado que contiene la lista de frutas (aquí simulada)
     const [frutas, setFrutas] = useState<Fruta[]>([]);
 
-    // Hook de navegación para redirigir a los detalles de una fruta
+
     const navigate = useNavigate();
 
-    // useEffect para simular carga de datos inicial
+    // para simular carga de datos inicial
     useEffect(() => {
-        // Aquí iría una llamada real a la base de datos
+
         setFrutas([
             {
                 id: "1",

@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import "../styles/DetalleFruta.css";
 import frutasData from "../data/frutas.json";
-import { VolverButton } from "../components/VolverButton"; // ✅ botón de volver
+import { VolverButton } from "../components/VolverButton"; // botón de volver
 
 type Comentario = {
     usuario: string;
@@ -120,7 +120,7 @@ export const DetalleFruta: React.FC = () => {
                 </p>
             )}
 
-            {/* ✅ Botón de volver al catálogo */}
+            {/* Botón de volver al catálogo */}
             <VolverButton ruta="/catalogo" />
         </div>
     );

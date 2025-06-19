@@ -27,7 +27,7 @@ export const AdminPanel: React.FC = () => {
     const [buscarUsuario, setBuscarUsuario] = useState({ username: "", email: "" });
 
     useEffect(() => {
-        // ✅ Cargar desde JSON
+        // cargar desde JSON
         setFrutas(frutasData);
         setUsuarios(usuariosData);
     }, []);
