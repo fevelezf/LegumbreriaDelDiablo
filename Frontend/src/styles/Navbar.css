@@ -1,0 +1,76 @@
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 60px;
+    background-color: #a7c7e7;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    box-sizing: border-box;
+}
+
+.navbar-left img.navbar-logo {
+    height: 40px;
+    object-fit: contain;
+}
+
+.navbar-center {
+    display: flex;
+    gap: 2rem;
+}
+
+.navbar-center a,
+.navbar-right a,
+.navbar-login-button {
+    font-size: 18px;
+    text-decoration: none;
+    color: black;
+    font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.navbar-center a:hover,
+.navbar-right a:hover,
+.navbar-login-button:hover {
+    color: #646cff;
+}
+
+.navbar-right {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+/* Responsive para pantallas pequeñas */
+@media only screen and (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        height: auto;
+        padding: 1rem;
+        align-items: flex-start;
+    }
+
+    .navbar-center {
+        flex-direction: column;
+        width: 100%;
+        gap: 0.8rem;
+        margin: 1rem 0;
+    }
+
+    .navbar-right {
+        flex-direction: column;
+        width: 100%;
+        gap: 0.5rem;
+    }
+
+    .navbar-left {
+        align-self: center;
+    }
+}

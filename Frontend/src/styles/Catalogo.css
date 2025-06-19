@@ -1,0 +1,96 @@
+.catalogo-container {
+    padding: 2rem;
+    color: white;
+    width: 100%;
+    box-sizing: border-box;
+    min-height: 100vh;
+    background-color: #0f0f0f;
+}
+
+.catalogo-container h2 {
+    text-align: center;
+    margin-bottom: 1rem;
+    font-size: 2rem;
+    color: #ffcc00;
+}
+
+.catalogo-descripcion {
+    text-align: center;
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    color: #ccc;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* 🔧 CAMBIO PRINCIPAL: solo 2 columnas en desktop */
+.grid-frutas {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    padding: 1rem;
+}
+
+/* Responsive: 1 columna en pantallas pequeñas */
+@media (max-width: 768px) {
+    .grid-frutas {
+        grid-template-columns: 1fr;
+    }
+}
+
+.tarjeta-fruta {
+    background-color: #1f1f1f;
+    padding: 1.2rem;
+    border-radius: 10px;
+    text-align: center;
+    transition: transform 0.2s;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.tarjeta-fruta:hover {
+    transform: scale(1.03);
+}
+
+.tarjeta-fruta img {
+    max-width: 100%;
+    height: 160px;
+    object-fit: contain;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+}
+
+.tarjeta-fruta h3 {
+    margin: 0.5rem 0;
+    font-size: 1.2rem;
+    color: #fff;
+}
+
+.tarjeta-fruta p {
+    margin: 0.3rem 0;
+    color: #ccc;
+}
+
+.tarjeta-fruta .descripcion {
+    font-size: 0.9rem;
+    color: #cccccc;
+    margin: 0.5rem 0 1rem;
+}
+
+.tarjeta-fruta button {
+    background-color: #3f51b5;
+    color: white;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: auto;
+}
+
+.tarjeta-fruta button:hover {
+    background-color: #303f9f;
+}

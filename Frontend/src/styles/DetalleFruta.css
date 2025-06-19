@@ -1,0 +1,64 @@
+.detalle-fruta {
+    max-width: 800px;
+    margin: auto;
+    padding: 2rem;
+    color: white;
+}
+
+.detalle-contenido {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.detalle-contenido img {
+    max-width: 300px;
+    border-radius: 10px;
+    object-fit: contain;
+}
+
+.detalle-info {
+    flex: 1;
+}
+
+.comentarios {
+    margin-top: 2rem;
+}
+
+.comentario {
+    background-color: #1e1e1e;
+    padding: 1rem;
+    margin: 1rem 0;
+    border-radius: 8px;
+}
+
+.form-comentario {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.form-comentario input,
+.form-comentario textarea,
+.form-comentario select {
+    padding: 0.6rem;
+    background-color: #2c2c2c;
+    border: none;
+    border-radius: 6px;
+    color: white;
+}
+
+.form-comentario button {
+    background-color: #4caf50;
+    color: white;
+    padding: 0.6rem 1rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.form-comentario button:hover {
+    background-color: #43a047;
+}
