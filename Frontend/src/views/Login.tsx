@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import "../styles/Login.css";
-import frutaImage from "../assets/logo.png";
+import loginImage from "../assets/login.jpg";
 
 export const Login: React.FC = () => {
     const [usuario, setUsuario] = useState("");
@@ -16,8 +16,8 @@ export const Login: React.FC = () => {
         if (usuario === "admin" && password === "admin123") {
             login({ username: "admin", email: "admin@mail.com", role: "admin" });
             navigate("/admin");
-        } else if (usuario === "luffy" && password === "gomu123") {
-            login({ username: "luffy", email: "luffy@mail.com", role: "usuario" });
+        } else if (usuario === "pipe" && password === "123") {
+            login({ username: "pipelotas", email: "pipe@mail.com", role: "usuario" });
             navigate("/catalogo");
         } else {
             setError("Usuario o contraseña incorrectos.");
@@ -28,7 +28,7 @@ export const Login: React.FC = () => {
         <div className="login-wrapper">
             {/* Columna izquierda: imagen */}
             <div className="login-image">
-                <img src={frutaImage} alt="Fruta del Diablo" />
+                <img src={loginImage} alt="Fruta del Diablo" />
             </div>
 
             {/* Columna derecha: formulario */}
@@ -52,6 +52,7 @@ export const Login: React.FC = () => {
                     />
 
                     <button onClick={handleLogin}>Entrar</button>
+                    <></>
 
                     <p className="registro-link">
                         ¿No tienes cuenta? <a href="/register">Regístrate</a>

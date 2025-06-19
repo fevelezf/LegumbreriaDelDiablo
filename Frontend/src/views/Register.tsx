@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import "../styles/Register.css";
-import frutaImage from "../assets/logo.png";
+import signinImage from "../assets/signin.jpg";
 
 export const Register: React.FC = () => {
     const [form, setForm] = useState({
@@ -46,13 +46,15 @@ export const Register: React.FC = () => {
         <div className="register-wrapper">
             {/* Columna izquierda: imagen */}
             <div className="register-image">
-                <img src={frutaImage} alt="Fruta del Diablo" />
+                <img src={signinImage
+                
+                } alt="Fruta del Diablo" />
             </div>
 
             {/* Columna derecha: formulario */}
             <div className="register-form-container">
                 <div className="register-form-content">
-                    <h2>Crear una cuenta</h2>
+                    <h2>Regístrate y encuentra tu fruta prohibida</h2>
 
                     {error && <p className="error-msg">{error}</p>}
 

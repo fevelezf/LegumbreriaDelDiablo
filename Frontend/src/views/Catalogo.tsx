@@ -36,20 +36,6 @@ export const Catalogo: React.FC = () => {
                 imagen: gomuImg
             },
             {
-                id: "1",
-                nombre: "Gomu Gomu no Mi",
-                tipo: "Paramecia",
-                descripcion: "Convierte el cuerpo del usuario en goma elástica.",
-                imagen: gomuImg
-            },
-            {
-                id: "2",
-                nombre: "Mera Mera no Mi",
-                tipo: "Logia",
-                descripcion: "Permite al usuario convertirse en fuego.",
-                imagen: meraImg
-            },
-            {
                 id: "2",
                 nombre: "Mera Mera no Mi",
                 tipo: "Logia",

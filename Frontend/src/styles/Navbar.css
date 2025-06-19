@@ -12,6 +12,9 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
     z-index: 1000;
     box-sizing: border-box;
+    
+    background: linear-gradient(to right, #9a4eae, #4f28aa);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 .navbar-left img.navbar-logo {

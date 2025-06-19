@@ -48,7 +48,10 @@ export const DetalleFruta: React.FC = () => {
                 id: "1",
                 nombre: "Gomu Gomu no Mi",
                 tipo: "Paramecia",
-                descripcion: "Convierte al usuario en goma.",
+                descripcion: "Descripción: Convierte el cuerpo del usuario en goma elástica,\n"
+                +"permitiéndole estirarse, rebotar y resistir impactos físicos.\n"
+                +"Más adelante se revela que es la Hito Hito no Mi, modelo: Nika,\n" 
+                +"una fruta mítica con habilidades de transformación y combate caricaturesco.",
                 historia: "Encontrada por Shanks y consumida por Luffy.",
                 imagen: gomuImg,
             },
@@ -56,7 +59,8 @@ export const DetalleFruta: React.FC = () => {
                 id: "2",
                 nombre: "Mera Mera no Mi",
                 tipo: "Logia",
-                descripcion: "Permite convertirse en fuego.",
+                descripcion: "Permite al usuario convertirse en fuego, generar llamas a voluntad \n"
+                +"y lanzar ataques ígneos devastadores. Fue usada por Portgas D. Ace y luego por Sabo.",
                 historia: "Perteneció a Portgas D. Ace.",
                 imagen: meraImg,
             },
@@ -64,7 +68,9 @@ export const DetalleFruta: React.FC = () => {
                 id: "3",
                 nombre: "Ope ope no Mi",
                 tipo: "Logia",
-                descripcion: "Permite al usuario crear una sala en la que puede manipular todo a su antojo.",
+                descripcion: "Permite crear una “sala” en la que el usuario puede manipular todo a \n"
+                +"su antojo como si hiciera cirugía: teletransportar, cortar sin dañar, intercambiar\n"
+                +"almas y hasta otorgar la inmortalidad con una técnica especial. Usada por Trafalgar D. Water Law.",
                 historia: "Perteneció a  Trafalgar D. Law.",
                 imagen: opeImg,
             },

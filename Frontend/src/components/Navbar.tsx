@@ -3,7 +3,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import "../styles/Navbar.css";
-import logo from "../assets/logo (1).png";
+import logo from "../assets/logo (2).png";
 
 export const Navbar: React.FC = () => {
     const { user, logout } = useAuth();
