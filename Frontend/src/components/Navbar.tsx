@@ -26,6 +26,8 @@ export const Navbar: React.FC = () => {
                 <Link to="/">Inicio</Link>
                 <Link to="/buscar">Buscar una fruta</Link>
                 {user && <Link to="/registrar">Agregar fruta</Link>}
+                {/* solo para administrador */}
+                {user?.role === "admin" && <Link to="/admin">Panel Admin</Link>}
             </div>
 
             {/* autenticación */}
