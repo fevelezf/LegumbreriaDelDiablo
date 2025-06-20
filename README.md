@@ -6,7 +6,7 @@
 
 ## 🧪 RITOS INICIALES PARA CORRER EL FRONTEND
 
-Antes de comenzar, asegúrate de tener abierta la carpeta `LegumbreriaDelDiablo` en tu IDE de preferencia. Luego, realiza los siguientes pasos:
+Antes de comenzar, asegúrate de tener abierta la carpeta `LegumbreriaDelDiablo` en tu IDE de preferencia. Luego, realiza los siguientes pasos en la Terminal:
 
 1. 🔮 Navega al directorio del frontend:
    ```bash
