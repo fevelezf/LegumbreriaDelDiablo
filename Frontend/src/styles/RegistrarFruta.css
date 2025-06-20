@@ -37,6 +37,7 @@
   max-width: 450px;
   display: flex;
   flex-direction: column;
+  font-family: 'Pirata One', cursive;
 }
 
 .registrar-form-content h2 {
