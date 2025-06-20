@@ -39,6 +39,7 @@ Una vez cargue la aplicación en el navegador, podrás:
 - 🔐 Iniciar sesión (Sign in)
 - ✨ Crear una cuenta nueva (Sign up)
 - 🌶️ Agregar una Fruta (Si ya estas logueado)
+- 🔐 Buscar una Fruta
 - Privilegios de Admin ( Si lo eres )
 
 ---
