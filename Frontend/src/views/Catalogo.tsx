@@ -9,6 +9,7 @@ type Fruta = {
     tipo: string;
     descripcion: string;
     imagen: string;
+    calificaciones?: number[];
 };
 
 export const Catalogo: React.FC = () => {
@@ -18,6 +19,13 @@ export const Catalogo: React.FC = () => {
     useEffect(() => {
         setFrutas(frutasData); // ✅ cargamos las frutas del archivo JSON
     }, []);
+
+
+    const calcularPromedio = (calificaciones?: number[]) => {
+        if (!calificaciones || calificaciones.length === 0) return "Sin calificaciones";
+        const suma = calificaciones.reduce((a, b) => a + b, 0);
+        return (suma / calificaciones.length).toFixed(1);
+    };
 
     return (
         <div className="catalogo-container">
@@ -34,6 +42,7 @@ export const Catalogo: React.FC = () => {
                         <h3>{fruta.nombre}</h3>
                         <p><strong>Tipo:</strong> {fruta.tipo}</p>
                         <p className="descripcion">{fruta.descripcion}</p>
+                        <p><strong>Promedio de Calificación:</strong> {calcularPromedio(fruta.calificaciones)} ⭐</p>
                         <button onClick={() => navigate(`/detalle/${fruta.id}`)}>
                             Calificar
                         </button>
