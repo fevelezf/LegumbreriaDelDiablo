@@ -25,7 +25,7 @@
     margin-right: auto;
 }
 
-/* 🔧 CAMBIO PRINCIPAL: solo 2 columnas en desktop */
+
 .grid-frutas {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -33,12 +33,13 @@
     padding: 1rem;
 }
 
-/* Responsive: 1 columna en pantallas pequeñas */
+
 @media (max-width: 768px) {
     .grid-frutas {
         grid-template-columns: 1fr;
     }
 }
+
 
 .tarjeta-fruta {
     background-color: #1f1f1f;
@@ -94,4 +95,144 @@
 
 .tarjeta-fruta button:hover {
     background-color: #303f9f;
+}
+
+
+
+.detalle-fruta {
+    max-width: 800px;
+    margin: auto;
+    padding: 2rem;
+    color: white;
+    font-family: 'Pirata One', cursive;
+}
+
+.detalle-fruta h2 {
+    text-align: center;
+    font-size: 2.2rem;
+    margin-bottom: 1.5rem;
+}
+
+.detalle-contenido {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.detalle-contenido img {
+    max-width: 300px;
+    border-radius: 10px;
+    object-fit: contain;
+}
+
+.detalle-info {
+    flex: 1;
+}
+
+
+.comentarios {
+    margin-top: 2rem;
+}
+
+.comentario {
+    background-color: #1e1e1e;
+    padding: 1rem;
+    margin: 1rem 0;
+    border-radius: 8px;
+}
+
+
+.form-comentario {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.form-comentario input,
+.form-comentario textarea,
+.form-comentario select {
+    padding: 0.6rem;
+    background-color: #2c2c2c;
+    border: none;
+    border-radius: 6px;
+    color: white;
+}
+
+.form-comentario button {
+    background-color: #4caf50;
+    color: white;
+    padding: 0.6rem 1rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.form-comentario button:hover {
+    background-color: #43a047;
+}
+
+
+.login-requerido {
+    text-align: center;
+    margin-top: 2rem;
+    font-size: 1rem;
+    color: #aaa;
+}
+
+.login-requerido a {
+    color: #ff5252;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+
+
+@media (max-width: 600px) {
+    .detalle-contenido {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .detalle-contenido img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .detalle-info {
+        width: 100%;
+    }
+}
+
+@media (max-width: 500px) {
+    .catalogo-container {
+        padding: 1rem;
+    }
+
+    .catalogo-container h2 {
+        font-size: 1.6rem;
+    }
+
+    .catalogo-descripcion {
+        font-size: 1rem;
+        padding: 0 1rem;
+    }
+
+    .tarjeta-fruta {
+        padding: 1rem;
+    }
+
+    .tarjeta-fruta h3 {
+        font-size: 1.1rem;
+    }
+
+    .tarjeta-fruta .descripcion {
+        font-size: 0.85rem;
+    }
+
+    .tarjeta-fruta button {
+        font-size: 0.9rem;
+        padding: 0.5rem 1rem;
+    }
 }

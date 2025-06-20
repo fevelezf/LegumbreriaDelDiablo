@@ -84,4 +84,21 @@
     text-decoration: underline;
 }
 
+@media (max-width: 600px) {
+    .detalle-contenido {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .detalle-contenido img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .detalle-info {
+        width: 100%;
+    }
+}
+
+
 

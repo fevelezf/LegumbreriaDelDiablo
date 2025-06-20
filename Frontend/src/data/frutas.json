@@ -3,24 +3,24 @@
     "id": "1",
     "nombre": "Gomu Gomu no Mi",
     "tipo": "Paramecia",
-    "descripcion": "Convierte al usuario en goma.",
-    "historia": "Consumida por Monkey D. Luffy.",
+    "descripcion": "Otorga al usuario un cuerpo de goma, permitiéndole estirarse, rebotar y resistir impactos físicos. Aunque parece simple, su poder se vuelve increíblemente versátil en combate gracias a la creatividad del usuario, permitiendo técnicas únicas como los Gears.",
+    "historia": "Fue consumida por Monkey D. Luffy cuando era niño, marcando el inicio de su camino como pirata. Más tarde se revela que esta fruta es en realidad la Hito Hito no Mi, Modelo: Nika, una Zoan Mítica escondida por el Gobierno Mundial debido a su enorme poder y simbolismo legendario.",
     "imagen": "/gomu.png"
   },
   {
     "id": "2",
     "nombre": "Mera Mera no Mi",
     "tipo": "Logia",
-    "descripcion": "Otorga control del fuego.",
-    "historia": "Consumida por Ace.",
+    "descripcion": "Permite al usuario crear, controlar y transformarse en fuego. Le otorga inmunidad a ataques físicos comunes y la capacidad de lanzar llamas devastadoras. Es una de las Frutas Logia más temidas por su alto poder destructivo y velocidad de ataque.",
+    "historia": "Fue consumida por Portgas D. Ace, hermano de Luffy y comandante de la Segunda División de los Piratas de Barbablanca. Su dominio del fuego lo convirtió en una leyenda. Tras su muerte, la fruta renació y actualmente es poseída por Sabo, revolucionario y hermano jurado de Ace.",
     "imagen": "/mera.png"
   },
   {
     "id": "3",
     "nombre": "Ope Ope no Mi",
     "tipo": "Paramecia",
-    "descripcion": "Permite crear un área quirúrgica donde el usuario puede manipular cualquier cosa como en una operación.",
-    "historia": "Consumida por Trafalgffar D. Water Law.",
+    "descripcion": "Permite al usuario generar una \"sala de operaciones\" donde puede manipular objetos, personas e incluso órganos como si realizara una cirugía. Dentro de esta zona, puede teletransportar, cortar sin herir y hasta intercambiar personalidades. Es conocida como la “Fruta Definitiva” por su potencial quirúrgico y estratégico.",
+    "historia": "Fue consumida por Trafalgar D. Water Law, capitán de los Piratas Heart. Usó sus poderes para convertirse en uno de los piratas más temidos y un importante aliado contra los Emperadores del Mar. Esta fruta también tiene la habilidad única de otorgar la inmortalidad a cambio de la vida del usuario.\n\n",
     "imagen": "/opeope.png"
   }
 ]
