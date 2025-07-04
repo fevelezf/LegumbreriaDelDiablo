@@ -18,6 +18,11 @@
     font-family: 'Pirata One', cursive;
 }
 
+.navbar-left {
+    display: flex;
+    align-items: center;
+}
+
 .navbar-left img.navbar-logo {
     height: 40px;
     object-fit: contain;
@@ -60,31 +65,62 @@
     font-size: 17px;
 }
 
-/* Responsive para pantallas pequeñas */
+.navbar-hamburger {
+    display: none;
+    font-size: 30px;
+    cursor: pointer;
+    color: black;
+}
+
+/* Mobile */
 @media only screen and (max-width: 768px) {
     .navbar {
-        flex-direction: column;
+        flex-direction: row;
         height: auto;
-        padding: 1rem 1rem;
-        align-items: center;
+        padding: 0.5rem 1rem;
     }
 
     .navbar-left {
-        margin-bottom: 0.5rem;
+        margin-bottom: 0;
     }
 
     .navbar-center,
     .navbar-right {
+        display: none;
         flex-direction: column;
         align-items: center;
         width: 100%;
         gap: 0.8rem;
         margin-bottom: 0.8rem;
+        background: linear-gradient(to right, #003049, #f77f00, #d62828);
+        padding: 0.5rem 0;
+    }
+
+    .navbar-center.active,
+    .navbar-right.active {
+        display: flex;
     }
 
     .navbar-center a,
     .navbar-login-button {
         width: 100%;
         text-align: center;
+    }
+
+    .navbar-hamburger {
+        display: block;
+        margin-left: auto;
+    }
+}
+
+/* Desktop */
+@media only screen and (min-width: 769px) {
+    .navbar-center,
+    .navbar-right {
+        display: flex !important;
+    }
+
+    .navbar-hamburger {
+        display: none;
     }
 }
