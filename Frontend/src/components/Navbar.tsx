@@ -33,7 +33,6 @@ export const Navbar: React.FC = () => {
 
             <div className={`navbar-center ${menuOpen ? "active" : ""}`}>
                 <Link to="/" onClick={() => setMenuOpen(false)}>Inicio</Link>
-                <Link to="/buscar" onClick={() => setMenuOpen(false)}>Buscar una fruta</Link>
                 {user && <Link to="/registrar" onClick={() => setMenuOpen(false)}>Agregar fruta</Link>}
                 {user?.role === "admin" && <Link to="/admin" onClick={() => setMenuOpen(false)}>Panel Admin</Link>}
             </div>

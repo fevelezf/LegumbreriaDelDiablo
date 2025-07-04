@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Pirata+One&display=swap');
+
 .catalogo-container {
     padding: 2rem;
     color: white;
@@ -25,6 +27,34 @@
     margin-right: auto;
 }
 
+/* Filtros */
+.filtros {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    justify-content: center;
+}
+
+.filtros input,
+.filtros select {
+    padding: 0.6rem;
+    font-size: 1rem;
+    border-radius: 6px;
+    border: none;
+    background-color: #2c2c2c;
+    color: white;
+    min-width: 150px;
+}
+
+.filtros input::placeholder {
+    color: #aaa;
+}
+
+.filtros input:focus,
+.filtros select:focus {
+    outline: 2px solid #ffcc00;
+}
 
 .grid-frutas {
     display: grid;
@@ -33,13 +63,11 @@
     padding: 1rem;
 }
 
-
 @media (max-width: 768px) {
     .grid-frutas {
         grid-template-columns: 1fr;
     }
 }
-
 
 .tarjeta-fruta {
     background-color: #1f1f1f;
@@ -97,8 +125,6 @@
     background-color: #303f9f;
 }
 
-
-
 .detalle-fruta {
     max-width: 800px;
     margin: auto;
@@ -130,7 +156,6 @@
     flex: 1;
 }
 
-
 .comentarios {
     margin-top: 2rem;
 }
@@ -141,7 +166,6 @@
     margin: 1rem 0;
     border-radius: 8px;
 }
-
 
 .form-comentario {
     margin-top: 2rem;
@@ -173,7 +197,6 @@
     background-color: #43a047;
 }
 
-
 .login-requerido {
     text-align: center;
     margin-top: 2rem;
@@ -186,8 +209,6 @@
     font-weight: bold;
     text-decoration: underline;
 }
-
-
 
 @media (max-width: 600px) {
     .detalle-contenido {
@@ -202,6 +223,17 @@
 
     .detalle-info {
         width: 100%;
+    }
+
+    .filtros {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .filtros input,
+    .filtros select {
+        width: 100%;
+        max-width: 300px;
     }
 }
 
