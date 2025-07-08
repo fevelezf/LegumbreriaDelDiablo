@@ -1,16 +1,8 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/Catalogo.css";
-import frutasData from "../data/frutas.json";
-
-type Fruta = {
-    id: string;
-    nombre: string;
-    tipo: string;
-    descripcion: string;
-    imagen: string;
-    calificaciones?: number[];
-};
+import { getFrutas } from "../services/frutaService";
+import type { Fruta } from "../services/frutaService";
 
 export const Catalogo: React.FC = () => {
     const [frutas, setFrutas] = useState<Fruta[]>([]);
@@ -20,7 +12,16 @@ export const Catalogo: React.FC = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        setFrutas(frutasData);
+        const cargarFrutas = async () => {
+            try {
+                const datos = await getFrutas();
+                setFrutas(datos);
+            } catch (error) {
+                console.error("Error al cargar frutas", error);
+            }
+        };
+
+        cargarFrutas();
     }, []);
 
     const calcularPromedio = (calificaciones?: number[]) => {
@@ -30,16 +31,13 @@ export const Catalogo: React.FC = () => {
     };
 
     const frutasFiltradas = frutas
-        .filter(fruta =>
+        .filter((fruta) =>
             fruta.nombre.toLowerCase().includes(filtroNombre.toLowerCase()) &&
             (filtroTipo === "" || fruta.tipo.toLowerCase() === filtroTipo.toLowerCase())
         )
         .sort((a, b) => {
-            if (ordenAlfabetico === "asc") {
-                return a.nombre.localeCompare(b.nombre);
-            } else if (ordenAlfabetico === "desc") {
-                return b.nombre.localeCompare(a.nombre);
-            }
+            if (ordenAlfabetico === "asc") return a.nombre.localeCompare(b.nombre);
+            if (ordenAlfabetico === "desc") return b.nombre.localeCompare(a.nombre);
             return 0;
         });
 
@@ -65,10 +63,12 @@ export const Catalogo: React.FC = () => {
                     <option value="Paramecia">Paramecia</option>
                     <option value="Zoan">Zoan</option>
                     <option value="Logia">Logia</option>
-                    {/* Agrega otros tipos si los tienes en tus datos */}
                 </select>
 
-                <select value={ordenAlfabetico} onChange={(e) => setOrdenAlfabetico(e.target.value as "asc" | "desc" | "")}>
+                <select
+                    value={ordenAlfabetico}
+                    onChange={(e) => setOrdenAlfabetico(e.target.value as "asc" | "desc" | "")}
+                >
                     <option value="">Sin orden</option>
                     <option value="asc">A-Z</option>
                     <option value="desc">Z-A</option>
@@ -77,13 +77,13 @@ export const Catalogo: React.FC = () => {
 
             <div className="grid-frutas">
                 {frutasFiltradas.map((fruta) => (
-                    <div className="tarjeta-fruta" key={fruta.id}>
-                        <img src={fruta.imagen} alt={fruta.nombre} />
+                    <div className="tarjeta-fruta" key={fruta._id || fruta.id}>
+                        <img src={`http://localhost:5000/uploads/${fruta.imagen}`} alt={fruta.nombre} />
                         <h3>{fruta.nombre}</h3>
                         <p><strong>Tipo:</strong> {fruta.tipo}</p>
                         <p className="descripcion">{fruta.descripcion}</p>
                         <p><strong>Promedio de Calificación:</strong> {calcularPromedio(fruta.calificaciones)} ⭐</p>
-                        <button onClick={() => navigate(`/detalle/${fruta.id}`)}>
+                        <button onClick={() => navigate(`/detalle/${fruta._id}`)}>
                             Calificar
                         </button>
                     </div>

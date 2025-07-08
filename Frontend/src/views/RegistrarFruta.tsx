@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "../styles/RegistrarFruta.css";
 import frutaImage from "../assets/RegistrarFruta.png";
+import { crearFruta } from "../services/frutaService";
 
 export const RegistrarFruta: React.FC = () => {
   const [form, setForm] = useState({
@@ -51,21 +52,32 @@ export const RegistrarFruta: React.FC = () => {
     reader.readAsDataURL(archivo);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!form.nombre || !form.descripcion || !form.tipo || !form.imagen) {
       setMensaje("⚠️ Por favor completa todos los campos y sube una imagen válida.");
       return;
     }
 
-    console.log("Fruta registrada:", form);
-    setMensaje("🍇 Fruta registrada exitosamente.");
+    try {
+      const formData = new FormData();
+      formData.append("nombre", form.nombre);
+      formData.append("descripcion", form.descripcion);
+      formData.append("tipo", form.tipo);
+      formData.append("imagen", form.imagen);
 
-    setForm({
-      nombre: "",
-      descripcion: "",
-      tipo: "",
-      imagen: null,
-    });
+      await crearFruta(formData);
+
+      setMensaje("🍇 Fruta registrada exitosamente.");
+      setForm({
+        nombre: "",
+        descripcion: "",
+        tipo: "",
+        imagen: null,
+      });
+    } catch (error) {
+      console.error("Error al registrar fruta:", error);
+      setMensaje("❌ Ocurrió un error al registrar la fruta.");
+    }
   };
 
   return (
@@ -96,23 +108,14 @@ export const RegistrarFruta: React.FC = () => {
                 onChange={handleChange}
             ></textarea>
 
-            <select
-                name="tipo"
-                value={form.tipo}
-                onChange={handleChange}
-            >
+            <select name="tipo" value={form.tipo} onChange={handleChange}>
               <option value="">Selecciona un tipo de fruta</option>
               <option value="Paramecia">Paramecia</option>
               <option value="Zoan">Zoan</option>
               <option value="Logia">Logia</option>
             </select>
 
-
-            <input
-                type="file"
-                accept="image/png"
-                onChange={handleFileChange}
-            />
+            <input type="file" accept="image/png" onChange={handleFileChange} />
 
             <button onClick={handleSubmit}>Subir Fruta</button>
           </div>

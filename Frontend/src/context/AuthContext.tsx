@@ -1,46 +1,45 @@
-import React, { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 import type { ReactNode } from "react";
 
 
-// Tipo del usuario que se va a manejar
 type UserType = {
     username: string;
     email: string;
     role: "usuario" | "admin";
+    token: string;
 };
 
 
 type AuthContextType = {
-    user: UserType | null; // Usuario autenticado, o null si no está logueado
-    login: (userData: UserType) => void; // Función para iniciar sesión
-    logout: () => void; // Función para cerrar sesión
+    user: UserType | null;
+    login: (userData: UserType) => void;
+    logout: () => void;
 };
 
-// Crea el contexto
+
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-    // Estado que mantiene al usuario que esta en la sesion
     const [user, setUser] = useState<UserType | null>(null);
 
-    // Función para iniciar sesión: guarda los datos del usuario en el estado y en localStorage
     const login = (userData: UserType) => {
         setUser(userData);
         localStorage.setItem("authUser", JSON.stringify(userData));
+        localStorage.setItem("token", userData.token);
     };
 
-    // Función para cerrar sesión: borra los datos del usuario
     const logout = () => {
         setUser(null);
         localStorage.removeItem("authUser");
     };
 
-    React.useEffect(() => {
+    useEffect(() => {
         const storedUser = localStorage.getItem("authUser");
-        if (storedUser) setUser(JSON.parse(storedUser));
+        if (storedUser) {
+            setUser(JSON.parse(storedUser));
+        }
     }, []);
-
 
     return (
         <AuthContext.Provider value={{ user, login, logout }}>

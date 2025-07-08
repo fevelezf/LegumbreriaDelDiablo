@@ -2,15 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/BuscarFruta.css";
 import { VolverButton } from "../components/VolverButton";
-import frutasData from "../data/frutas.json";
-
-type Fruta = {
-    id: string;
-    nombre: string;
-    tipo: string;
-    descripcion: string;
-    imagen?: string;
-};
+import { getFrutas } from "../services/frutaService";
+import type { Fruta } from "../services/frutaService";
 
 export const BuscarFruta: React.FC = () => {
     const navigate = useNavigate();
@@ -19,20 +12,29 @@ export const BuscarFruta: React.FC = () => {
     const [resultados, setResultados] = useState<Fruta[]>([]);
     const [buscado, setBuscado] = useState(false);
 
-    // búsqueda desde JSON
-    const buscarFrutas = () => {
-        const filtradas = frutasData.filter((fruta) => {
-            const coincideNombre = fruta.nombre
-                .toLowerCase()
-                .includes(filtros.nombre.toLowerCase());
-            const coincideTipo = filtros.tipo
-                ? fruta.tipo.toLowerCase() === filtros.tipo.toLowerCase()
-                : true;
-            return coincideNombre && coincideTipo;
-        });
+    const buscarFrutas = async () => {
+        try {
+            const todas = await getFrutas();
 
-        setResultados(filtradas);
-        setBuscado(true);
+            const filtradas = todas.filter((fruta) => {
+                const coincideNombre = fruta.nombre
+                    .toLowerCase()
+                    .includes(filtros.nombre.toLowerCase());
+
+                const coincideTipo = filtros.tipo
+                    ? fruta.tipo.toLowerCase() === filtros.tipo.toLowerCase()
+                    : true;
+
+                return coincideNombre && coincideTipo;
+            });
+
+            setResultados(filtradas);
+            setBuscado(true);
+        } catch (error) {
+            console.error("Error al buscar frutas", error);
+            setResultados([]);
+            setBuscado(true);
+        }
     };
 
     return (
@@ -62,7 +64,7 @@ export const BuscarFruta: React.FC = () => {
                     <ul>
                         {resultados.map((fruta) => (
                             <li
-                                key={fruta.id}
+                                key={fruta._id || fruta.id}
                                 className="resultado-clickable"
                                 onClick={() => navigate(`/detalle/${fruta.id}`)}
                             >

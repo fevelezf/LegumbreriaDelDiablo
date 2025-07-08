@@ -3,14 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import "../styles/Login.css";
 import loginImage from "../assets/login.png";
-import usuarios from "../data/usuarios.json"; // JSON local
-
-type Usuario = {
-    username: string;
-    password: string;
-    email: string;
-    role: "admin" | "usuario";
-};
+import { login as loginRequest } from "../services/authService";
 
 export const Login: React.FC = () => {
     const [usuario, setUsuario] = useState("");
@@ -20,21 +13,21 @@ export const Login: React.FC = () => {
     const { login } = useAuth();
     const navigate = useNavigate();
 
-    const handleLogin = () => {
-        const userFound = (usuarios as Usuario[]).find(
-            (u) => u.username === usuario && u.password === password
-        );
+    const handleLogin = async () => {
+        try {
+            const res = await loginRequest({ email: usuario, password });
 
-        if (userFound) {
             login({
-                username: userFound.username,
-                email: userFound.email,
-                role: userFound.role,
+                username: res.username,
+                email: res.email,
+                role: res.role,
+                token: res.token,
             });
 
-            navigate(userFound.role === "admin" ? "/admin" : "/catalogo");
-        } else {
-            setError("Usuario o contraseña incorrectos.");
+            navigate(res.role === "admin" ? "/admin" : "/catalogo");
+        } catch (err) {
+            console.error("Error en login", err);
+            setError("❌ Usuario o contraseña incorrectos.");
         }
     };
 
@@ -53,7 +46,7 @@ export const Login: React.FC = () => {
 
                     <input
                         type="text"
-                        placeholder="Usuario"
+                        placeholder="Correo electrónico"
                         value={usuario}
                         onChange={(e) => setUsuario(e.target.value)}
                     />

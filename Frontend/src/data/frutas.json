@@ -6,7 +6,8 @@
     "descripcion": "Otorga al usuario un cuerpo de goma, permitiéndole estirarse, rebotar y resistir impactos físicos. Aunque parece simple, su poder se vuelve increíblemente versátil en combate gracias a la creatividad del usuario, permitiendo técnicas únicas como los Gears.",
     "historia": "Fue consumida por Monkey D. Luffy cuando era niño, marcando el inicio de su camino como pirata. Más tarde se revela que esta fruta es en realidad la Hito Hito no Mi, Modelo: Nika, una Zoan Mítica escondida por el Gobierno Mundial debido a su enorme poder y simbolismo legendario.",
     "imagen": "/gomu.png",
-    "calificaciones": [2, 1, 5, 5]
+    "calificaciones": [2, 1, 5, 5],
+    "comentarios" : []
   },
   {
     "id": "2",

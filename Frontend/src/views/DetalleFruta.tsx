@@ -2,23 +2,9 @@ import { useParams, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import "../styles/DetalleFruta.css";
-import frutasData from "../data/frutas.json";
-import { VolverButton } from "../components/VolverButton"; // botón de volver
-
-type Comentario = {
-    usuario: string;
-    texto: string;
-    rating: number;
-};
-
-type Fruta = {
-    id: string;
-    nombre: string;
-    tipo: string;
-    descripcion: string;
-    historia?: string;
-    imagen: string;
-};
+import { VolverButton } from "../components/VolverButton";
+import { getFrutaById, crearComentario } from "../services/frutaService";
+import type { Fruta, Comentario } from "../services/frutaService";
 
 export const DetalleFruta: React.FC = () => {
     const { id } = useParams();
@@ -32,18 +18,23 @@ export const DetalleFruta: React.FC = () => {
     });
 
     useEffect(() => {
-        const frutaEncontrada = frutasData.find((f) => f.id === id);
-        if (frutaEncontrada) {
-            setFruta(frutaEncontrada);
-            setComentarios([
-                { usuario: "Zoro", texto: "¡Poder brutal!", rating: 5 },
-                { usuario: "Nami", texto: "Me da miedo 😅", rating: 3 },
-            ]);
-        }
+        const cargarFruta = async () => {
+            if (!id) return;
+
+            try {
+                const frutaBackend = await getFrutaById(id);
+                setFruta(frutaBackend);
+                setComentarios(frutaBackend.comentarios || []);
+            } catch (error) {
+                console.error("Error al cargar fruta", error);
+            }
+        };
+
+        cargarFruta();
     }, [id]);
 
-    const enviarComentario = () => {
-        if (!nuevoComentario.texto.trim()) return;
+    const enviarComentario = async () => {
+        if (!nuevoComentario.texto.trim() || !fruta?._id) return;
 
         const comentario: Comentario = {
             usuario: user?.username || "Anónimo",
@@ -51,8 +42,13 @@ export const DetalleFruta: React.FC = () => {
             rating: nuevoComentario.rating,
         };
 
-        setComentarios((prev) => [...prev, comentario]);
-        setNuevoComentario({ texto: "", rating: 5 });
+        try {
+            const actualizado = await crearComentario(fruta._id, comentario);
+            setComentarios(actualizado.comentarios || []);
+            setNuevoComentario({ texto: "", rating: 5 });
+        } catch (error) {
+            console.error("Error al comentar", error);
+        }
     };
 
     if (!fruta) {
@@ -75,12 +71,16 @@ export const DetalleFruta: React.FC = () => {
 
             <div className="comentarios">
                 <h3>Experiencias y Opiniones</h3>
-                {comentarios.map((c, i) => (
-                    <div key={i} className="comentario">
-                        <strong>{c.usuario}</strong> - {c.rating}⭐<br />
-                        <em>{c.texto}</em>
-                    </div>
-                ))}
+                {comentarios.length === 0 ? (
+                    <p>No hay comentarios aún.</p>
+                ) : (
+                    comentarios.map((c, i) => (
+                        <div key={i} className="comentario">
+                            <strong>{c.usuario}</strong> - {c.rating}⭐<br />
+                            <em>{c.texto}</em>
+                        </div>
+                    ))
+                )}
             </div>
 
             {user ? (
@@ -120,7 +120,6 @@ export const DetalleFruta: React.FC = () => {
                 </p>
             )}
 
-            {/* Botón de volver al catálogo */}
             <VolverButton ruta="/catalogo" />
         </div>
     );

@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import "../styles/AdminPanel.css";
-import frutasData from "../data/frutas.json";
-import usuariosData from "../data/usuarios.json";
+import { getFrutas, eliminarFruta } from "../services/frutaService";
+import { getUsuarios } from "../services/userService";
 
-// Tipos de datos
+// Tipos
 type Fruta = {
+    _id?: string; // MongoDB usa _id
     id: string;
     nombre: string;
     tipo: string;
@@ -13,30 +14,53 @@ type Fruta = {
 type Usuario = {
     username: string;
     email: string;
-    password: string;
     role: string;
 };
-
 
 export const AdminPanel: React.FC = () => {
     const [frutas, setFrutas] = useState<Fruta[]>([]);
     const [usuarios, setUsuarios] = useState<Usuario[]>([]);
-
     const [buscarFruta, setBuscarFruta] = useState({ nombre: "", tipo: "" });
     const [buscarUsuario, setBuscarUsuario] = useState({ username: "", email: "" });
 
     useEffect(() => {
-        // cargar desde JSON
-        setFrutas(frutasData);
-        setUsuarios(usuariosData);
+        const cargarDatos = async () => {
+            try {
+                const frutasBackend = await getFrutas();
+                const usuariosBackend = await getUsuarios();
+                setFrutas(frutasBackend);
+                setUsuarios(usuariosBackend);
+            } catch (error) {
+                console.error("Error al cargar datos del backend", error);
+            }
+        };
+        cargarDatos();
     }, []);
 
-    const eliminarFruta = () => {
-        alert("Fruta eliminada (ojo es simulado)");
+    const eliminarFrutaSeleccionada = async () => {
+        const fruta = frutas.find(
+            (f) =>
+                f.nombre.toLowerCase() === buscarFruta.nombre.toLowerCase() &&
+                f.tipo.toLowerCase() === buscarFruta.tipo.toLowerCase()
+        );
+
+        if (!fruta) {
+            alert("❌ Fruta no encontrada");
+            return;
+        }
+
+        try {
+            await eliminarFruta(fruta._id || fruta.id);
+            setFrutas((prev) => prev.filter((f) => f._id !== fruta._id));
+            alert("✅ Fruta eliminada correctamente");
+        } catch (error) {
+            console.error("Error al eliminar fruta", error);
+            alert("❌ No se pudo eliminar la fruta");
+        }
     };
 
     const eliminarUsuario = () => {
-        alert("Usuario eliminado (ojo es simulado)");
+        alert("Eliminación real de usuarios aún no implementada 🔒");
     };
 
     return (
@@ -58,7 +82,7 @@ export const AdminPanel: React.FC = () => {
                     value={buscarFruta.tipo}
                     onChange={(e) => setBuscarFruta({ ...buscarFruta, tipo: e.target.value })}
                 />
-                <button className="danger-btn" onClick={eliminarFruta}>
+                <button className="danger-btn" onClick={eliminarFrutaSeleccionada}>
                     Enviarla al infierno
                 </button>
             </div>
@@ -85,7 +109,7 @@ export const AdminPanel: React.FC = () => {
 
             {/* Ver frutas */}
             <div className="admin-section">
-                <h3>Ver frutas</h3>
+                <h3>Frutas registradas</h3>
                 <table>
                     <thead>
                     <tr>
@@ -95,7 +119,7 @@ export const AdminPanel: React.FC = () => {
                     </thead>
                     <tbody>
                     {frutas.map((f) => (
-                        <tr key={f.id}>
+                        <tr key={f._id || f.id}>
                             <td>{f.nombre}</td>
                             <td>{f.tipo}</td>
                         </tr>
@@ -106,7 +130,7 @@ export const AdminPanel: React.FC = () => {
 
             {/* Ver usuarios */}
             <div className="admin-section">
-                <h3>Ver usuarios</h3>
+                <h3>Usuarios registrados</h3>
                 <table>
                     <thead>
                     <tr>
