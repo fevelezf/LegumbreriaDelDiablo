@@ -68,8 +68,9 @@ exports.eliminarFruta = async (req, res) => {
     try {
         const fruta = await Fruta.findByIdAndDelete(req.params.id);
         if (!fruta) return res.status(404).json({ msg: 'Fruta no encontrada' });
-        res.json({ msg: 'Fruta eliminada correctamente' });
+        res.status(200).json({ msg: 'Fruta eliminada correctamente' });
     } catch (error) {
         res.status(500).json({ msg: 'Error al eliminar fruta', error });
     }
 };
+

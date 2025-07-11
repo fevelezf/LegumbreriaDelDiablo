@@ -16,6 +16,7 @@ const upload = require('../middlewares/multerMiddleware');
 router.get('/', getFrutas);
 router.get('/:id', getFrutaById);
 
+
 // Protegidas
 router.post('/', auth, upload.single('imagen'), crearFruta);
 router.put('/:id', auth, upload.single('imagen'), actualizarFruta);

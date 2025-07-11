@@ -36,8 +36,7 @@ export const DetalleFruta: React.FC = () => {
     const enviarComentario = async () => {
         if (!nuevoComentario.texto.trim() || !fruta?._id) return;
 
-        const comentario: Comentario = {
-            usuario: user?.username || "Anónimo",
+        const comentario = {
             texto: nuevoComentario.texto,
             rating: nuevoComentario.rating,
         };
@@ -60,7 +59,10 @@ export const DetalleFruta: React.FC = () => {
             <h2>{fruta.nombre}</h2>
 
             <div className="detalle-contenido">
-                <img src={fruta.imagen} alt={fruta.nombre} />
+                <img
+                    src={`http://localhost:5000/uploads/${fruta.imagen}`}
+                    alt={fruta.nombre}
+                />
 
                 <div className="detalle-info">
                     <p><strong>Tipo:</strong> {fruta.tipo}</p>
@@ -76,7 +78,7 @@ export const DetalleFruta: React.FC = () => {
                 ) : (
                     comentarios.map((c, i) => (
                         <div key={i} className="comentario">
-                            <strong>{c.usuario}</strong> - {c.rating}⭐<br />
+                            <strong>{c.autor?.username || "Anónimo"}</strong> - {c.rating}⭐<br />
                             <em>{c.texto}</em>
                         </div>
                     ))

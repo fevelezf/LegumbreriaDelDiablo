@@ -1,21 +1,7 @@
 import { useEffect, useState } from "react";
 import "../styles/AdminPanel.css";
-import { getFrutas, eliminarFruta } from "../services/frutaService";
-import { getUsuarios } from "../services/userService";
-
-// Tipos
-type Fruta = {
-    _id?: string; // MongoDB usa _id
-    id: string;
-    nombre: string;
-    tipo: string;
-};
-
-type Usuario = {
-    username: string;
-    email: string;
-    role: string;
-};
+import { getFrutas, eliminarFruta, type Fruta } from "../services/frutaService";
+import { getUsuarios, eliminarUsuario, type Usuario } from "../services/userService";
 
 export const AdminPanel: React.FC = () => {
     const [frutas, setFrutas] = useState<Fruta[]>([]);
@@ -31,9 +17,10 @@ export const AdminPanel: React.FC = () => {
                 setFrutas(frutasBackend);
                 setUsuarios(usuariosBackend);
             } catch (error) {
-                console.error("Error al cargar datos del backend", error);
+                console.error("Error al cargar datos del backend:", error);
             }
         };
+
         cargarDatos();
     }, []);
 
@@ -44,23 +31,41 @@ export const AdminPanel: React.FC = () => {
                 f.tipo.toLowerCase() === buscarFruta.tipo.toLowerCase()
         );
 
-        if (!fruta) {
-            alert("❌ Fruta no encontrada");
+        if (!fruta || !fruta._id) {
+            alert("❌ Fruta no encontrada o sin ID");
             return;
         }
 
         try {
-            await eliminarFruta(fruta._id || fruta.id);
+            await eliminarFruta(fruta._id);
             setFrutas((prev) => prev.filter((f) => f._id !== fruta._id));
             alert("✅ Fruta eliminada correctamente");
         } catch (error) {
-            console.error("Error al eliminar fruta", error);
+            console.error("Error al eliminar fruta:", error);
             alert("❌ No se pudo eliminar la fruta");
         }
     };
 
-    const eliminarUsuario = () => {
-        alert("Eliminación real de usuarios aún no implementada 🔒");
+    const eliminarUsuarioSeleccionado = async () => {
+        const usuario = usuarios.find(
+            (u) =>
+                u.username.toLowerCase() === buscarUsuario.username.toLowerCase() &&
+                u.email.toLowerCase() === buscarUsuario.email.toLowerCase()
+        );
+
+        if (!usuario || !usuario._id) {
+            alert("❌ Usuario no encontrado o sin ID");
+            return;
+        }
+
+        try {
+            await eliminarUsuario(usuario._id);
+            setUsuarios((prev) => prev.filter((u) => u._id !== usuario._id));
+            alert("✅ Usuario eliminado correctamente");
+        } catch (error) {
+            console.error("Error al eliminar usuario:", error);
+            alert("❌ No se pudo eliminar el usuario");
+        }
     };
 
     return (
@@ -102,7 +107,7 @@ export const AdminPanel: React.FC = () => {
                     value={buscarUsuario.email}
                     onChange={(e) => setBuscarUsuario({ ...buscarUsuario, email: e.target.value })}
                 />
-                <button className="danger-btn" onClick={eliminarUsuario}>
+                <button className="danger-btn" onClick={eliminarUsuarioSeleccionado}>
                     Enviarlo al infierno
                 </button>
             </div>
@@ -119,7 +124,7 @@ export const AdminPanel: React.FC = () => {
                     </thead>
                     <tbody>
                     {frutas.map((f) => (
-                        <tr key={f._id || f.id}>
+                        <tr key={f._id}>
                             <td>{f.nombre}</td>
                             <td>{f.tipo}</td>
                         </tr>
@@ -140,7 +145,7 @@ export const AdminPanel: React.FC = () => {
                     </thead>
                     <tbody>
                     {usuarios.map((u) => (
-                        <tr key={u.username}>
+                        <tr key={u._id}>
                             <td>{u.username}</td>
                             <td>{u.email}</td>
                         </tr>
