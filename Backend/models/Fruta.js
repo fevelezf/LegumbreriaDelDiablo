@@ -26,9 +26,10 @@ const FrutaSchema = new mongoose.Schema({
     },
     comentarios: [
         {
-            usuario: { type: String },
-            texto: { type: String },
-            rating: { type: Number, min: 1, max: 5 },
+            texto: { type: String, required: true },
+            rating: { type: Number, required: true },
+            autor: { type: mongoose.Schema.Types.ObjectId, ref: 'Usuario', required: true },
+            fecha: { type: Date, default: Date.now }
         },
     ],
 });

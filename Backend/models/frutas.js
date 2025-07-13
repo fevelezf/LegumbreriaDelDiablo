@@ -1,50 +1,20 @@
 const mongoose = require('mongoose');
 
-// Esquema de un comentario
 const comentarioSchema = new mongoose.Schema({
-    texto: {
-        type: String,
-        required: true
-    },
-    autor: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User', // Relación con el modelo de usuario
-        required: true
-    },
-    fecha: {
-        type: Date,
-        default: Date.now
-    }
-}, { _id: true });
+    texto: { type: String, required: true },
+    rating: { type: Number, required: true },
+    autor: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+    fecha: { type: Date, default: Date.now }
+});
 
-// Esquema de fruta
 const frutaSchema = new mongoose.Schema({
-    nombre: {
-        type: String,
-        required: true,
-        trim: true
-    },
-    tipo: {
-        type: String,
-        required: true
-    },
-    descripcion: {
-        type: String
-    },
-    historia: {
-        type: String
-    },
-    imagen: {
-        type: String // ejemplo: "gomu.png"
-    },
-    calificaciones: {
-        type: [Number],
-        default: []
-    },
-    comentarios: {
-        type: [comentarioSchema],
-        default: []
-    }
+    nombre: { type: String, required: true },
+    tipo: { type: String, required: true },
+    descripcion: String,
+    historia: String,
+    imagen: String,
+    calificaciones: [Number],
+    comentarios: [comentarioSchema]
 }, {
     timestamps: true
 });

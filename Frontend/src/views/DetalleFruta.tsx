@@ -78,7 +78,7 @@ export const DetalleFruta: React.FC = () => {
                 ) : (
                     comentarios.map((c, i) => (
                         <div key={i} className="comentario">
-                            <strong>{c.autor?.username || "Anónimo"}</strong> - {c.rating}⭐<br />
+                            <strong>{c.autor?.username || "Anónimo"}</strong> - {c.rating} ⭐<br />
                             <em>{c.texto}</em>
                         </div>
                     ))

@@ -16,7 +16,8 @@ exports.agregarComentario = async (req, res) => {
         // Agregar comentario con autor autenticado
         const nuevoComentario = {
             texto,
-            autor: req.user._id,
+            rating,
+            autor: req.user.id,
             fecha: new Date()
         };
         fruta.comentarios.push(nuevoComentario);
