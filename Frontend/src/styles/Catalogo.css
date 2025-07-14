@@ -8,6 +8,8 @@
     min-height: 100vh;
     background-color: #0f0f0f;
     font-family: 'Pirata One', cursive;
+    user-select: none;
+    cursor: default;
 }
 
 .catalogo-container h2 {

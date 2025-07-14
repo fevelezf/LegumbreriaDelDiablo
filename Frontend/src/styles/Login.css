@@ -31,6 +31,8 @@
     align-items: center;     /* centra verticalmente */
     padding: 2rem;
     font-family: 'Pirata One', cursive;
+    user-select: none;
+    cursor: default;
 }
 
 

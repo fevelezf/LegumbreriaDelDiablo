@@ -5,6 +5,8 @@
     padding: 2rem;
     background-color: #181818;
     border-radius: 8px;
+    user-select: none;
+    cursor: default;
 }
 
 .admin-panel h2 {
@@ -58,5 +60,7 @@ th, td {
     padding: 2rem;
     background-color: #181818;
     border-radius: 8px;
+    user-select: none;
+    cursor: default;
 }
 

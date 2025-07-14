@@ -17,6 +17,8 @@
     box-sizing: border-box;
     overflow: hidden;
     font-family: 'Pirata One', cursive;
+    user-select: none;
+    cursor: default;
 }
 
 /* Capa semitransparente encima del fondo */
@@ -49,6 +51,8 @@
     max-width: 800px;
     margin-bottom: 1.5rem;
     color: #f0f0f0;
+    user-select: none;
+    cursor: default;
 }
 
 .home-btn {

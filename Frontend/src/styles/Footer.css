@@ -10,6 +10,8 @@
     box-sizing: border-box;
     margin-top: auto;
     font-family: 'Pirata One', cursive;
+    user-select: none;
+    cursor: default;
 }
 
 /* Responsive ajuste de fuente para móviles */
