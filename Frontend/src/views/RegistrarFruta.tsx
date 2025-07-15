@@ -12,6 +12,7 @@ export const RegistrarFruta: React.FC = () => {
   });
 
   const [mensaje, setMensaje] = useState("");
+  const [esExito, setEsExito] = useState(false); // <- nuevo estado
 
   const handleChange = (
       e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -25,23 +26,23 @@ export const RegistrarFruta: React.FC = () => {
 
     if (!archivo) return;
 
-    // Validar extensión
     if (archivo.type !== "image/png") {
       setMensaje("❌ Solo se permiten imágenes en formato PNG.");
+      setEsExito(false);
       return;
     }
 
-    // Validar dimensiones
     const reader = new FileReader();
     reader.onload = function (event) {
       const img = new Image();
       img.onload = function () {
         if (img.width > 250 || img.height > 250) {
           setMensaje("❌ La imagen no debe superar los 250x250 píxeles.");
+          setEsExito(false);
           setForm({ ...form, imagen: null });
         } else {
           setForm({ ...form, imagen: archivo });
-          setMensaje(""); // limpiar mensaje si todo está bien
+          setMensaje("");
         }
       };
       if (typeof event.target?.result === "string") {
@@ -55,6 +56,7 @@ export const RegistrarFruta: React.FC = () => {
   const handleSubmit = async () => {
     if (!form.nombre || !form.descripcion || !form.tipo || !form.imagen) {
       setMensaje("⚠️ Por favor completa todos los campos y sube una imagen válida.");
+      setEsExito(false);
       return;
     }
 
@@ -68,6 +70,7 @@ export const RegistrarFruta: React.FC = () => {
       await crearFruta(formData);
 
       setMensaje("🍇 Fruta registrada exitosamente.");
+      setEsExito(true); // <- marcar como éxito
       setForm({
         nombre: "",
         descripcion: "",
@@ -77,21 +80,26 @@ export const RegistrarFruta: React.FC = () => {
     } catch (error) {
       console.error("Error al registrar fruta:", error);
       setMensaje("❌ Ocurrió un error al registrar la fruta.");
+      setEsExito(false); // <- marcar como error
     }
   };
 
   return (
       <div className="registrar-wrapper">
-        {/* Columna izquierda: imagen */}
         <div className="registrar-image">
           <img src={frutaImage} alt="Fruta decorativa" />
         </div>
 
-        {/* Columna derecha: formulario */}
         <div className="registrar-form-container">
           <div className="registrar-form-content">
             <h2>Registrar una nueva Fruta del Diablo</h2>
-            {mensaje && <p className="mensaje">{mensaje}</p>}
+
+            {/* Mostrar mensaje con clase dinámica */}
+            {mensaje && (
+                <p className={esExito ? "mensaje-exito" : "mensaje-error"}>
+                  {mensaje}
+                </p>
+            )}
 
             <input
                 type="text"
