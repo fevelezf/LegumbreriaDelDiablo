@@ -33,8 +33,17 @@ export const Navbar: React.FC = () => {
 
             <div className={`navbar-center ${menuOpen ? "active" : ""}`}>
                 <Link to="/" onClick={() => setMenuOpen(false)}>Inicio</Link>
-                {user && <Link to="/registrar" onClick={() => setMenuOpen(false)}>Agregar fruta</Link>}
-                {user?.role === "admin" && <Link to="/admin" onClick={() => setMenuOpen(false)}>Panel Admin</Link>}
+                <Link to="/catalogo" onClick={() => setMenuOpen(false)}>Explorar Frutas</Link>
+                {user && (
+                    <Link to="/registrar" onClick={() => setMenuOpen(false)}>
+                        Agregar fruta
+                    </Link>
+                )}
+                {user?.role === "admin" && (
+                    <Link to="/admin" onClick={() => setMenuOpen(false)}>
+                        Panel Admin
+                    </Link>
+                )}
             </div>
 
             <div className={`navbar-right ${menuOpen ? "active" : ""}`}>
@@ -47,8 +56,12 @@ export const Navbar: React.FC = () => {
                     </>
                 ) : (
                     <>
-                        <Link to="/login" className="navbar-login-button" onClick={() => setMenuOpen(false)}>Sign In</Link>
-                        <Link to="/register" className="navbar-login-button" onClick={() => setMenuOpen(false)}>Sign Up</Link>
+                        <Link to="/login" className="navbar-login-button" onClick={() => setMenuOpen(false)}>
+                            Sign In
+                        </Link>
+                        <Link to="/register" className="navbar-login-button" onClick={() => setMenuOpen(false)}>
+                            Sign Up
+                        </Link>
                     </>
                 )}
             </div>
