@@ -12,7 +12,7 @@ export type Fruta = {
     historia?: string;
     imagen?: string;
     calificaciones?: number[];
-    comentarios?: Comentario[];
+    comentarios: Comentario[];
 };
 
 

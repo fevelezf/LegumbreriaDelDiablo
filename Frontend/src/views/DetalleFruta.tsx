@@ -4,14 +4,13 @@ import { useAuth } from "../context/AuthContext";
 import "../styles/DetalleFruta.css";
 import { VolverButton } from "../components/VolverButton";
 import { getFrutaById, crearComentario } from "../services/frutaService";
-import type { Fruta, Comentario } from "../services/frutaService";
+import type { Fruta } from "../services/frutaService";
 
 export const DetalleFruta: React.FC = () => {
     const { id } = useParams();
     const { user } = useAuth();
 
     const [fruta, setFruta] = useState<Fruta | null>(null);
-    const [comentarios, setComentarios] = useState<Comentario[]>([]);
     const [nuevoComentario, setNuevoComentario] = useState({
         texto: "",
         rating: 5,
@@ -24,7 +23,6 @@ export const DetalleFruta: React.FC = () => {
             try {
                 const frutaBackend = await getFrutaById(id);
                 setFruta(frutaBackend);
-                setComentarios(frutaBackend.comentarios || []);
             } catch (error) {
                 console.error("Error al cargar fruta", error);
             }
@@ -43,7 +41,7 @@ export const DetalleFruta: React.FC = () => {
 
         try {
             const actualizado = await crearComentario(fruta._id, comentario);
-            setComentarios(actualizado.comentarios || []);
+            setFruta(actualizado.fruta);
             setNuevoComentario({ texto: "", rating: 5 });
         } catch (error) {
             console.error("Error al comentar", error);
@@ -73,10 +71,10 @@ export const DetalleFruta: React.FC = () => {
 
             <div className="comentarios">
                 <h3>Experiencias y Opiniones</h3>
-                {comentarios.length === 0 ? (
+                {fruta.comentarios?.length === 0 ? (
                     <p>No hay comentarios aún.</p>
                 ) : (
-                    comentarios.map((c, i) => (
+                    fruta.comentarios.map((c, i) => (
                         <div key={i} className="comentario">
                             <strong>{c.autor?.username || "Anónimo"}</strong> - {c.rating} ⭐<br />
                             <em>{c.texto}</em>

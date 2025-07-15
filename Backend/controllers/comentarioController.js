@@ -13,13 +13,14 @@ exports.agregarComentario = async (req, res) => {
             return res.status(404).json({ msg: 'Fruta no encontrada' });
         }
 
-        // Agregar comentario con autor autenticado
+        // Crear el nuevo comentario
         const nuevoComentario = {
             texto,
             rating,
             autor: req.user.id,
             fecha: new Date()
         };
+
         fruta.comentarios.push(nuevoComentario);
 
         // Agregar calificación si es válida
@@ -27,21 +28,21 @@ exports.agregarComentario = async (req, res) => {
             fruta.calificaciones.push(rating);
         }
 
+        // Guardar fruta con el nuevo comentario
         await fruta.save();
 
-        // Obtener fruta actualizada con comentarios poblados
+        // Recargar fruta con comentarios actualizados y poblados
         const frutaActualizada = await Fruta.findById(frutaId)
             .populate('comentarios.autor', 'username email');
 
-        res.status(201).json(frutaActualizada);
-
-        res.status(201).json({
-            msg: 'Comentario y calificación agregados',
+        return res.status(201).json({
+            msg: 'Comentario y calificación agregados correctamente',
             fruta: frutaActualizada
         });
+
     } catch (error) {
         console.error("Error al agregar comentario:", error);
-        res.status(500).json({ msg: 'Error del servidor', error });
+        return res.status(500).json({ msg: 'Error del servidor', error });
     }
 };
 
@@ -57,8 +58,11 @@ exports.obtenerComentarios = async (req, res) => {
             return res.status(404).json({ msg: 'Fruta no encontrada' });
         }
 
-        res.status(200).json(fruta.comentarios);
+        const comentarios = fruta.comentarios || [];
+
+        return res.status(200).json(comentarios);
     } catch (error) {
-        res.status(500).json({ msg: 'Error al obtener comentarios', error });
+        console.error("Error al obtener comentarios:", error);
+        return res.status(500).json({ msg: 'Error al obtener comentarios', error });
     }
 };
