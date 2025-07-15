@@ -82,7 +82,7 @@ exports.eliminarFruta = async (req, res) => {
 exports.agregarComentario = async (req, res) => {
     try {
         const frutaId = req.params.id;
-        const { texto, rating } = req.body; // ✅ extrae 'rating' desde el body
+        const { texto, rating } = req.body; 
 
         const fruta = await Fruta.findById(frutaId);
         if (!fruta) {
@@ -91,13 +91,13 @@ exports.agregarComentario = async (req, res) => {
 
         const nuevoComentario = {
             texto,
-            rating, // ✅ usa 'rating' en vez de 'calificacion'
+            rating,
             autor: req.user.id,
             fecha: new Date()
         };
 
         fruta.comentarios.push(nuevoComentario);
-        fruta.calificaciones.push(rating); // ✅ si deseas almacenar el número en calificaciones
+        fruta.calificaciones.push(rating);
 
         await fruta.save();
 

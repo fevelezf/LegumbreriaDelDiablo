@@ -18,10 +18,10 @@ const FrutaSchema = new mongoose.Schema({
         type: String,
     },
     imagen: {
-        type: String, // ruta del archivo en /uploads
+        type: String,
     },
     calificaciones: {
-        type: [Number], // array de números (1 a 5)
+        type: [Number],
         default: [],
     },
     comentarios: [
