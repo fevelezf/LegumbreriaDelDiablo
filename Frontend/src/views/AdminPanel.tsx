@@ -40,6 +40,7 @@ export const AdminPanel: React.FC = () => {
             await eliminarFruta(fruta._id);
             setFrutas((prev) => prev.filter((f) => f._id !== fruta._id));
             alert("✅ Fruta eliminada correctamente");
+            setBuscarFruta({ nombre: "", tipo: "" });
         } catch (error) {
             console.error("Error al eliminar fruta:", error);
             alert("❌ No se pudo eliminar la fruta");
@@ -62,6 +63,7 @@ export const AdminPanel: React.FC = () => {
             await eliminarUsuario(usuario._id);
             setUsuarios((prev) => prev.filter((u) => u._id !== usuario._id));
             alert("✅ Usuario eliminado correctamente");
+            setBuscarUsuario({ username: "", email: "" });
         } catch (error) {
             console.error("Error al eliminar usuario:", error);
             alert("❌ No se pudo eliminar el usuario");
@@ -124,7 +126,11 @@ export const AdminPanel: React.FC = () => {
                     </thead>
                     <tbody>
                     {frutas.map((f) => (
-                        <tr key={f._id}>
+                        <tr
+                            key={f._id}
+                            onClick={() => setBuscarFruta({ nombre: f.nombre, tipo: f.tipo })}
+                            style={{ cursor: "pointer" }}
+                        >
                             <td>{f.nombre}</td>
                             <td>{f.tipo}</td>
                         </tr>
@@ -145,7 +151,11 @@ export const AdminPanel: React.FC = () => {
                     </thead>
                     <tbody>
                     {usuarios.map((u) => (
-                        <tr key={u._id}>
+                        <tr
+                            key={u._id}
+                            onClick={() => setBuscarUsuario({ username: u.username, email: u.email })}
+                            style={{ cursor: "pointer" }}
+                        >
                             <td>{u.username}</td>
                             <td>{u.email}</td>
                         </tr>

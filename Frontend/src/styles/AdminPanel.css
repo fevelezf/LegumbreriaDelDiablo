@@ -63,4 +63,7 @@ th, td {
     user-select: none;
     cursor: default;
 }
-
+.admin-panel table tbody tr:hover {
+    background-color: #333;
+    transition: background-color 0.2s ease;
+}
